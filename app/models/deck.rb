@@ -5,5 +5,5 @@ class Deck < ApplicationRecord
     has_many :flashcards
 
     #Validations
-    validates :title, :creator_id, presence: true
+    validates :title, :teacher_id, presence: true
 end

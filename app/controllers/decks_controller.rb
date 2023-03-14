@@ -1,7 +1,7 @@
 class DecksController < ApplicationController
 
     def index 
-        decks = Deck.all
+        decks = Deck.includes(:flashcards).all
         render json: decks, status: :ok
     end
 
@@ -28,6 +28,6 @@ class DecksController < ApplicationController
     end
 
     def deck_params
-        params.permit(:title, :creator_id)
+        params.permit(:title, :teacher_id)
     end
 end

@@ -34,6 +34,6 @@ class FlashcardsController < ApplicationController
     end
 
     def flashcard_params
-        params.permit(:title, :creator_id)
+        params.permit(:front, :back, :deck_id)
     end
 end

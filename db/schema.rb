@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_14_171011) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_14_205502) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -28,7 +28,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_14_171011) do
 
   create_table "decks", force: :cascade do |t|
     t.string "title"
-    t.integer "creator_id"
+    t.integer "teacher_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -43,7 +43,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_14_171011) do
   end
 
   create_table "students", force: :cascade do |t|
-    t.boolean "teacher"
+    t.boolean "lehrer"
     t.string "first_name"
     t.string "last_name"
     t.string "username"
@@ -55,7 +55,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_14_171011) do
   end
 
   create_table "teachers", force: :cascade do |t|
-    t.boolean "teacher"
+    t.boolean "lehrer"
     t.string "first_name"
     t.string "last_name"
     t.string "username"

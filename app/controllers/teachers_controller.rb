@@ -8,7 +8,7 @@ class TeachersController < ApplicationController
 
     def show 
         teacher = find_teacher
-        render json: teacher, status: :ok
+        render json: teacher, include: {students: {include: :assignments}}, status: :ok
     end
 
     def create 
@@ -19,10 +19,10 @@ class TeachersController < ApplicationController
     private 
 
     def find_teacher
-        Teacher.find(params[:id])
+        Teacher.includes(students: :assignments).find(params[:id])
     end
 
     def teacher_params
-        params.permit(:title, :creator_id)
+        params.permit(:lehrer, :first_name, :last_name, :username, :email, :password_digest)
     end
 end
