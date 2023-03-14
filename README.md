@@ -12,6 +12,7 @@ AssignMint is a web application designed to help teachers easily create assignme
 - [Domain Model / Entity Relationship Diagram](#domain-model--entity-relationship-diagram)
 - [MVP Requirements](#mvp-requirements)
 - [Stretch Goals](#stretch-goals)
+- [Known Bugs or Issues](#known-bugs-or-issues)
 - [Links](#links)
 
 ## Installation
@@ -80,6 +81,9 @@ Assignments: A join table to track which decks are assigned to which students. T
 - Logging in as a student will display a student-version of the web-app
 - Students will be able to study flashcards
 - Connect to an external API (to be determined) to import decks that others have created on other platforms
+
+## Known Bugs or Issues
+Currently, there are no known bugs or issues. However, if any issues are discovered, they will be documented in this section of the readme.
 
 ## Links
 - [Project Pitch](https://docs.google.com/document/d/1WmIiYez49Na_1eP1I17_heVjv6m_5hpN2YAwVDWoQXM/edit#)
