@@ -46,11 +46,11 @@ To use AssignMint, simply navigate to the web application's URL and create an ac
 
 ## Domain Model / Entity Relationship Diagram
 
-![Screenshot 2023-03-14 103129](https://user-images.githubusercontent.com/115106981/225034214-b01f6812-0c24-4390-aaa7-fea72f6fccfb.png) 
+![Screenshot 2023-03-14 104133](https://user-images.githubusercontent.com/115106981/225037406-988d3ea4-6697-4443-adf4-c4d7508201ad.png) 
 
-Teachers: A table to store information about the teachers using the application. This table includes columns for the teacher's name, username, and password (encrypted with bcrypt).
+Teachers: A table to store information about the teachers using the application. This table includes columns for the teacher's name, username, and password_digest (encrypted with bcrypt).
 
-Students: A table to store information about the students using the application. This table includes columns for the student's name, username, password (encrypted with bcrypt), and a foreign key referencing the student's teacher.
+Students: A table to store information about the students using the application. This table includes columns for the student's name, username, password_digest (encrypted with bcrypt), and a foreign key referencing the student's teacher.
 
 Decks: A table to store information about the flashcard decks created by teachers. This table includes columns for the deck's name and a foreign key reference to the teacher who created the deck.
 
