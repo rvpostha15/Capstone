@@ -44,7 +44,7 @@ AssignMint uses the following technologies:
 
 ## Domain Model / Entity Relationship Diagram
 
-![Domain Model / Entity Relationship Diagram](https://imgur.com/a/qJCpDaz) 
+![Domain Model / Entity Relationship Diagram](https://imgur.com/a/qJCpDaz.png) 
 
 ## MVP Requirements
 
