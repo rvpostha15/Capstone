@@ -12,7 +12,7 @@ AssignMint is a web application designed to help teachers easily create assignme
 - [Domain Model / Entity Relationship Diagram](#domain-model--entity-relationship-diagram)
 - [MVP Requirements](#mvp-requirements)
 - [Stretch Goals](#stretch-goals)
-- [User Story](#user-story)
+- [Links](#links)
 
 ## Installation
 
@@ -65,3 +65,9 @@ To use AssignMint, simply navigate to the web application's URL and create an ac
 - Logging in as a student will display a student-version of the web-app
 - Students will be able to study flashcards
 - Connect to an external API (to be determined) to import decks that others have created on other platforms
+
+## Links
+- [Project Pitch](https://docs.google.com/document/d/1WmIiYez49Na_1eP1I17_heVjv6m_5hpN2YAwVDWoQXM/edit#)
+- [Domain Models](https://docs.google.com/spreadsheets/d/1DpbfynByxM7Uud9Q8oIT-ou6IvRDhjhTXE_a2pIqjNA/edit#gid=0)
+- [Validations](https://docs.google.com/spreadsheets/d/1DpbfynByxM7Uud9Q8oIT-ou6IvRDhjhTXE_a2pIqjNA/edit#gid=1067435169)
+- [WireFrame](https://www.figma.com/file/q7smkkMRpJdFsE0Nrlr2Rs/Ron-Posthauer-Capstone?node-id=0%3A1&t=3Ze0QhK2kDwvFuA5-1)
