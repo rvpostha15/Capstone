@@ -10,6 +10,7 @@ AssignMint is a web application designed to help teachers easily create assignme
 - [Usage](#usage)
 - [Technologies](#technologies)
 - [Domain Model / Entity Relationship Diagram](#domain-model--entity-relationship-diagram)
+- [API Routes](#api-routes)
 - [MVP Requirements](#mvp-requirements)
 - [Stretch Goals](#stretch-goals)
 - [Known Bugs or Issues](#known-bugs-or-issues)
@@ -58,6 +59,51 @@ Decks: A table to store information about the flashcard decks created by teacher
 Flashcards: A table to store information about individual flashcards within each deck. This table includes columns for the front and back of each flashcard, as well as a foreign key reference to the deck it belongs to.
 
 Assignments: A join table to track which decks are assigned to which students. This table includes foreign key references to the student, the deck, and the teacher who created the assignment.
+
+## API Routes
+
+### Teachers
+
+| Method | Endpoint          | Description              |
+| ------ | ----------------- | ------------------------ |
+| GET    | /teachers/:id     | Get a single teacher by id |
+| POST   | /teachers         | Create a new teacher      |
+
+### Students
+
+| Method | Endpoint               | Description                 |
+| ------ | ---------------------- | --------------------------- |
+| GET    | /students              | Get all students            |
+| GET    | /students/:id          | Get a single student by id  |
+| POST   | /students              | Create a new student        |
+
+### Decks
+
+| Method | Endpoint               | Description                 |
+| ------ | ---------------------- | --------------------------- |
+| GET    | /decks                 | Get all decks               |
+| GET    | /decks/:id             | Get a single deck by id     |
+| POST   | /decks                 | Create a new deck           |
+| DELETE | /decks/:id             | Delete a deck by id         |
+
+### Flashcards
+
+| Method | Endpoint               | Description                 |
+| ------ | ---------------------- | --------------------------- |
+| GET    | /flashcards            | Get all flashcards          |
+| GET    | /flashcards/:id        | Get a single flashcard by id |
+| POST   | /flashcards            | Create a new flashcard      |
+| PATCH  | /flashcards/:id        | Update a flashcard by id    |
+| DELETE | /flashcards/:id        | Delete a flashcard by id    |
+
+### Assignments
+
+| Method | Endpoint               | Description                 |
+| ------ | ---------------------- | --------------------------- |
+| GET    | /assignments           | Get all assignments         |
+| GET    | /assignments/:id       | Get a single assignment by id |
+| POST   | /assignments           | Create a new assignment     |
+| DELETE | /assignments/:id       | Delete an assignment by id  |
 
 ## MVP Requirements
 
