@@ -41,7 +41,7 @@ To use AssignMint, simply navigate to the web application's URL and create an ac
 
 ## Domain Model / Entity Relationship Diagram
 
-![ERD](https://user-images.githubusercontent.com/115106981/224885570-ca1d17fa-67c1-4ecc-89e0-07f43d1ffcf0.jpg) 
+![Screenshot 2023-03-14 103129](https://user-images.githubusercontent.com/115106981/225034214-b01f6812-0c24-4390-aaa7-fea72f6fccfb.png) 
 
 Teachers: A table to store information about the teachers using the application. This table includes columns for the teacher's name, username, and password (encrypted with bcrypt).
 
