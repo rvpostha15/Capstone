@@ -43,6 +43,16 @@ To use AssignMint, simply navigate to the web application's URL and create an ac
 
 ![ERD](https://user-images.githubusercontent.com/115106981/224885570-ca1d17fa-67c1-4ecc-89e0-07f43d1ffcf0.jpg) 
 
+Teachers: A table to store information about the teachers using the application. This table includes columns for the teacher's name, username, and password (encrypted with bcrypt).
+
+Students: A table to store information about the students using the application. This table includes columns for the student's name, username, password (encrypted with bcrypt), and a foreign key referencing the student's teacher.
+
+Decks: A table to store information about the flashcard decks created by teachers. This table includes columns for the deck's name and a foreign key reference to the teacher who created the deck.
+
+Flashcards: A table to store information about individual flashcards within each deck. This table includes columns for the front and back of each flashcard, as well as a foreign key reference to the deck it belongs to.
+
+Assignments: A join table to track which decks are assigned to which students. This table includes foreign key references to the student, the deck, and the teacher who created the assignment.
+
 ## MVP Requirements
 
 ### Backend (Ruby on Rails API)
