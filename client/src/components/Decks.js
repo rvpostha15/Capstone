@@ -1,8 +1,13 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import Deck from "./Deck"
 import "../css/MintyTheme.css";
+import NewDeck from "./NewDeck";
 
 function Decks({ decks }) {
+
+    const [newDeck, setNewDeck] = useState(false)
+
     const deck = decks.map((deck)=> (
         <Link to = {`/decks/${deck.id}`} key = {deck.id}>
             <Deck
@@ -11,10 +16,23 @@ function Decks({ decks }) {
         </Link>
     ))
 
+    const toggleCreateNewDeck = () => {
+        setNewDeck(!newDeck)
+    }
+
     return(
         <>
             <div>{deck}</div>
-            <button>Create New Deck</button>
+            <button 
+                onClick={toggleCreateNewDeck}
+                className="minty-button"
+            >Create New Deck</button>
+            {newDeck ? (
+                <NewDeck/>
+            ) : (
+                null
+            )}
+            
         </>
     )
 }

@@ -8,6 +8,21 @@ body {
     background-color: #e0f2f1;
 }
 
+.minty-button {
+    font-size: 24px;
+    color: #007f7f;
+    background-color: #bbdad8;
+    font-weight: bold;
+    align-self: flex-start;
+    cursor: pointer;
+    border: 2px solid #007f7f;
+    border-radius: 5px;
+}
+
+.minty-button:hover {
+    background-color: #91ebe3;
+}
+
 .minty-text {
     color: #007f7f;
 }
@@ -31,8 +46,18 @@ body {
     background-color: #e0f2f1;
 }
 
-.content h1 {
+.content h1, 
+.content h2, 
+.content h3, 
+.content p,
+.content label {
     color: #007f7f;
+}
+.content h1:hover,  
+.content h3:hover, 
+.content p:hover {
+    color: #007f7f;
+    background-color: #91ebe3;
 }
 
 .content a {
