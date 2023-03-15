@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
   post '/decks/:deck_id/flashcards', to: 'flashcards#create'
 
+  delete '/decks/:deck_id', to: 'decks#destroy'
+
   get '*path',
       to: 'fallback#index',
       constraints: ->(req) { !req.xhr? && req.format.html? }
