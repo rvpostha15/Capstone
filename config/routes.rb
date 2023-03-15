@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   # root "articles#index"
   get '/hello', to: 'application#hello_world'
 
+  post '/decks/:deck_id/flashcards', to: 'flashcards#create'
+
   get '*path',
       to: 'fallback#index',
       constraints: ->(req) { !req.xhr? && req.format.html? }
