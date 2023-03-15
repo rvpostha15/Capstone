@@ -3,12 +3,12 @@
 function Flashcard({ flashcard }) {
     const { front, back, id } = flashcard
 
-    return(
-        <>
-            <h1>{front}</h1>
-            <h2>{back}</h2>
-        </>
-    )
+    return (
+        <div className="flashcard">
+            <div className="front">{front}</div>
+            <div className="back">{back}</div>
+        </div>
+    );
 }
 
 export default Flashcard
