@@ -1,6 +1,12 @@
 // client/src/components/App.js
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+
+//Redux
+import { useSelector, useDispatch } from 'react-redux';
+import { setDecks } from './store/slices/deckSlice';
+import { setCurrentTeacher } from './store/slices/teacherSlice';
+import { setStudents } from "./store/slices/studentSlice";
 
 // Components & CSS
 import "./css/MintyTheme.css";
@@ -8,47 +14,48 @@ import Students from "./components/Students.js";
 import Header from "./components/Header.js";
 import Decks from "./components/Decks";
 import ViewDeck from "./components/ViewDeck";
+import ViewStudent from "./components/ViewStudent";
 
 
 function App() {
-  const [currentTeacher, setCurrentTeacher] = useState('');
-  const [decks, setDecks] = useState([]);
-  const [currentDeck, setCurrentDeck] = useState('')
-
+  const dispatch = useDispatch();
+  const currentTeacher = useSelector((state) => state.teacher.currentTeacher);
+  const decks = useSelector((state) => state.deck.decks);
+  const currentDeck = useSelector((state) => state.deck.currentDeck);
+  const students = useSelector((state) => state.student.students)
+  
   // Fetch Teacher 3 => NEED TO UPDATE TO FETCH LOGGED IN TEACHER!!
   useEffect(() => {
-    fetch("/teachers/3")
+    fetch('/teachers/3')
       .then((r) => r.json())
-      .then((data) => setCurrentTeacher(data));
-  }, []);
+      .then((data) => {
+        dispatch(setCurrentTeacher(data))
+        dispatch(setStudents(data.students))
+      });
+  }, [dispatch]);
 
   useEffect(() => {
-    fetch("/decks")
+    fetch('/decks')
       .then((r) => r.json())
-      .then((data) => setDecks(data));
-  }, []);
-  console.log(decks)
+      .then((data) => dispatch(setDecks(data)));
+  }, [dispatch]);
 
   return (
     <BrowserRouter>
-      <Header/>
+      <Header />
       <div className="content">
         <Switch>
+          <Route path="/students/:id">
+            <ViewStudent />
+          </Route>
           <Route path="/students">
-            <Students
-              students = {currentTeacher.students}
-            />
+            <Students students={students} />
           </Route>
           <Route path="/decks/:id">
-            <ViewDeck
-              currentDeck = {currentDeck}
-            />
+            <ViewDeck />
           </Route>
           <Route path="/decks">
-            <Decks
-              decks = {decks}
-              setCurrentDeck = {setCurrentDeck}
-            />
+            <Decks decks={decks} />
           </Route>
           <Route path="/">
             <h1>Page Count: {currentTeacher.last_name}</h1>

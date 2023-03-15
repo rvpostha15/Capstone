@@ -2,25 +2,17 @@ import { Link } from "react-router-dom";
 import Deck from "./Deck"
 import "../css/MintyTheme.css";
 
-function Decks({ decks, setCurrentDeck }) {
-
-    
-
+function Decks({ decks }) {
     const deck = decks.map((deck)=> (
-        <Link to = {`/decks/${deck.id}`}>
+        <Link to = {`/decks/${deck.id}`} key = {deck.id}>
             <Deck
-                key = {deck.id}
                 deck = {deck}
-                setCurrentDeck = {setCurrentDeck}
             />
         </Link>
     ))
-    console.log(deck)
 
     return(
-        <div>
-            {deck}
-        </div>
+        <div>{deck}</div>
     )
 }
 

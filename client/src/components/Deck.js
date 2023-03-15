@@ -1,19 +1,18 @@
+import React from 'react';
+import '../css/MintyTheme.css';
+import { useDispatch } from 'react-redux';
+import { setCurrentDeck } from '../store/slices/deckSlice';
 
-import "../css/MintyTheme.css";
+function Deck({ deck }) {
+  const dispatch = useDispatch();
 
+  const handleClick = (e) => {
+    dispatch(setCurrentDeck(deck));
+  };
 
-function Deck({ deck, setCurrentDeck }) {
-
-    const handleClick = (e) => {
-        setCurrentDeck({...deck, [e.target.name]: e.target.value})
-    }
-
-    return(
-        
-            <h1 onClick = {handleClick}>
-                {deck.title}
-            </h1>
-        
-    )
+  return (
+    <h1 onClick={handleClick}>{deck.title}</h1>
+  );
 }
-export default Deck
+
+export default Deck;
