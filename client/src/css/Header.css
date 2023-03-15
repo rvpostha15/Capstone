@@ -1,0 +1,31 @@
+/* src/css/Header.css */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap');
+
+.vertical-menu {
+    display: block;
+    width: 200px;
+    height: 100vh;
+    position: fixed;
+    overflow-y: auto;
+    background-color: #bbdad8;
+}
+
+.vertical-menu .item {
+    display: block;
+    color: #007f7f;
+    font-family: 'Roboto Slab', serif;
+    font-size: 18px;
+    margin: 15px 0;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.vertical-menu .item:hover {
+    background-color: #91ebe3;
+}
+
+/* Active link styles */
+.vertical-menu .item.active {
+    background-color: #91ebe3;
+    font-weight: bold;
+}

@@ -1,0 +1,45 @@
+/* src/css/MintyTheme.css */
+
+body {
+    background-color: #e0f2f1;
+}
+
+.minty-background {
+    background-color: #e0f2f1;
+}
+
+.minty-text {
+    color: #007f7f;
+}
+
+.minty-highlight {
+    color: #00cc66;
+}
+
+.assignment {
+    background-color: #ff9696;
+    padding: 20px;
+}
+
+.assignment.complete {
+    background-color: #8ce8b7;
+}
+
+.content {
+    margin-left: 200px;
+    padding: 20px;
+    background-color: #e0f2f1;
+}
+
+.content h1 {
+    color: #007f7f;
+}
+
+.content a {
+    color: #007f7f;
+    text-decoration: none;
+}
+
+.content a:hover {
+    background-color: #91ebe3;
+}

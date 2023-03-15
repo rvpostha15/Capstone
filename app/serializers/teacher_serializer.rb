@@ -1,8 +1,8 @@
 class TeacherSerializer < ActiveModel::Serializer
-  attributes :id, :lehrer, :first_name, :last_name, :username, :email, :password_digest, :students_with_assignments
+  attributes :id, :lehrer, :first_name, :last_name, :username, :email, :password_digest, :students
 
   # Define a custom method called students_with_assignments
-  def students_with_assignments
+  def students
     # For each student associated with the teacher (object refers to the teacher instance)
     object.students.map do |student|
       # Call as_json on the student instance, which returns a hash representation of the student
