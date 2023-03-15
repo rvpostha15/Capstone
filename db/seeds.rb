@@ -11,8 +11,6 @@ puts "🌱 Planting seeds..."
       password: "password"
     )
   end
-
-puts "done planting teachers"
   
   # Students
 
@@ -46,8 +44,6 @@ puts "done planting teachers"
     )
   end
 
-  puts "done planting students"
-  
   # Decks
   5.times do
     Deck.create!(
@@ -55,8 +51,6 @@ puts "done planting teachers"
       teacher_id: Teacher.all.sample.id
     )
   end
-  
-  puts "done planting decks"
 
   # Flashcards
   50.times do
@@ -66,8 +60,6 @@ puts "done planting teachers"
       deck_id: Deck.all.sample.id,
     )
   end
-
-  puts "done planting cards"
   
   # Assignments
   3.times do
