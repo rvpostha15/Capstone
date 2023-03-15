@@ -12,7 +12,10 @@ function Decks({ decks }) {
     ))
 
     return(
-        <div>{deck}</div>
+        <>
+            <div>{deck}</div>
+            <button>Create New Deck</button>
+        </>
     )
 }
 

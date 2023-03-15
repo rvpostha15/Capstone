@@ -15,9 +15,8 @@ function Student({ student }) {
 
     return(
         <div onClick={handleClick}>
-        <h1>{first_name}</h1>
-        <h1>{last_name}</h1>
-        {/* <div>{assignment}</div> */}
+            <h1>{first_name}</h1>
+            <h1>{last_name}</h1>
         </div>
     )
 }
