@@ -1,18 +1,18 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { setDecks } from '../store/slices/deckSlice'
 import Flashcard from './Flashcard';
 import '../css/ViewDeck.css';
 import NewFlashcard from './NewFlashcard';
 
-function ViewDeck() {
+function ViewDeck(props) {
   const currentDeck = useSelector((state) => state.deck.currentDeck);
   const currentTeacher = useSelector((state) => state.teacher.currentTeacher);
   const [newFlashcard, setNewFlashcard] = useState(false);
   const [isSure, setIsSure] = useState(false);
   const flashcards = currentDeck.flashcards || [];
-  const navigate = useNavigate();
+  // const history = useHistory();
   const dispatch = useDispatch();
 
   const flashcardList = flashcards.map((flashcard) => (
@@ -36,7 +36,7 @@ function ViewDeck() {
   }
 
   const handleDeleteDeck = () => {
-    // history.push('/decks')
+    props.history.push('/decks')
     // fetch(`/decks/${currentDeck.id}`,{
     // method: 'DELETE'
     // })
@@ -78,4 +78,4 @@ function ViewDeck() {
   );
 }
 
-export default ViewDeck;
+export default withRouter(ViewDeck);
