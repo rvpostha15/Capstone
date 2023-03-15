@@ -1,4 +1,3 @@
-import Assignment from "./Assignment"
 import "../css/MintyTheme.css";
 import { useDispatch } from 'react-redux';
 import { setCurrentStudent } from '../store/slices/studentSlice';

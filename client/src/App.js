@@ -21,7 +21,7 @@ function App() {
   const dispatch = useDispatch();
   const currentTeacher = useSelector((state) => state.teacher.currentTeacher);
   const decks = useSelector((state) => state.deck.decks);
-  const currentDeck = useSelector((state) => state.deck.currentDeck);
+  // const currentDeck = useSelector((state) => state.deck.currentDeck);
   const students = useSelector((state) => state.student.students)
   
   // Fetch Teacher 3 => NEED TO UPDATE TO FETCH LOGGED IN TEACHER!!
