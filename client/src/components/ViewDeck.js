@@ -1,9 +1,10 @@
 import Flashcard from "./Flashcard"
+import '../css/ViewDeck.css';
 
 function ViewDeck({ currentDeck }) {
     const {title, flashcards} = currentDeck
 
-    const flashcard = flashcards.map((flashcard)=>(
+    const flashcardList = flashcards.map((flashcard)=>(
         <Flashcard
             key = {flashcard.id}
             flashcard = {flashcard}
@@ -11,8 +12,11 @@ function ViewDeck({ currentDeck }) {
     ))
     
 
-    return( 
-        <h1>{flashcard}</h1>
+    return(
+        <div className="view-deck-container">
+            <div className="title">{title}</div> 
+        {flashcardList}
+        </div>
     )
 }
 
