@@ -130,7 +130,7 @@ Assignments: A join table to track which decks are assigned to which students. T
 - Connect to an external API (to be determined) to import decks that others have created on other platforms
 
 ## Known Bugs or Issues
-Currently, there are no known bugs or issues. However, if any issues are discovered, they will be documented in this section of the readme.
+- Bug when deleting a flashcard. The flashcard will persist until you leave the current deck and then re-enter it. No refresh required.
 
 ## Links
 - [Project Pitch](https://docs.google.com/document/d/1WmIiYez49Na_1eP1I17_heVjv6m_5hpN2YAwVDWoQXM/edit#)
