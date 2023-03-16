@@ -37,6 +37,20 @@ body {
     background-color: #ff9696;
 }
 
+.tiny-minty-delete-button {
+    position: absolute;
+    top: 0;
+    right: -60px; /* Adjust this value based on the desired distance from the flashcard */
+    font-size: 60px; 
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .tiny-minty-delete-button:hover {
+    background-color: #ff9696 !important;
+  }
+
 .minty-text {
     color: #007f7f;
 }
