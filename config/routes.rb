@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get '/hello', to: 'application#hello_world'
 
   post '/decks/:deck_id/flashcards', to: 'flashcards#create'
+  delete '/decks/:deck_id/flashcards/:flashcard_id', to: 'flashcards#destroy'
 
   delete '/decks/:deck_id', to: 'decks#destroy'
 
