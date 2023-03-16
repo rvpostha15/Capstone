@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { setDecks, deleteDeck } from '../store/slices/deckSlice'
+import { setDecks, setCurrentDeck, deleteDeck } from '../store/slices/deckSlice'
+import { setFlashcards } from '../store/slices/flashcardSlice';
 import Flashcard from './Flashcard';
 import '../css/ViewDeck.css';
 import NewFlashcard from './NewFlashcard';
@@ -14,6 +15,25 @@ function ViewDeck(props) {
   const currentTeacher = useSelector((state) => state.teacher.currentTeacher);
   const [newFlashcard, setNewFlashcard] = useState(false);
   const [isSure, setIsSure] = useState(false);
+
+  useEffect(() => {
+    const fetchDeckData = async () => {
+      try {
+        const response = await fetch(`/decks/${currentDeck.id}`);
+        const data = await response.json();
+
+        // Update the current deck and flashcards in the state
+        dispatch(setCurrentDeck(data));
+        dispatch(setFlashcards(data.flashcards));
+      } catch (error) {
+        console.error('Error fetching deck data:', error);
+      }
+    };
+
+    if (currentDeck.id) {
+      fetchDeckData();
+    }
+  }, [currentDeck.id, dispatch]);
 
   const flashcardList = flashcards.map((flashcard) => (
     <Flashcard key={flashcard.id} flashcard={flashcard} />
