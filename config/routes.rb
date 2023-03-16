@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
   post '/decks/:deck_id/flashcards', to: 'flashcards#create'
   delete '/decks/:deck_id/flashcards/:flashcard_id', to: 'flashcards#destroy'
+  patch '/decks/:deck_id/flashcards/:flashcard_id', to: 'flashcards#update'
+ 
 
   delete '/decks/:deck_id', to: 'decks#destroy'
 
