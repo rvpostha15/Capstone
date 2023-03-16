@@ -15,6 +15,9 @@ function Header() {
         <NavLink className="item" to="/decks" activeClassName="active">
             Decks
         </NavLink>
+        <NavLink className="item" to="/new-assignment" activeClassName="active">
+            New Assignment
+        </NavLink>
     </div>
   );
 }

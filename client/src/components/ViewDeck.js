@@ -83,7 +83,7 @@ function ViewDeck(props) {
       {isSure ? (
         <div>
           <h3>
-          Are you sure you'd like to delete this deck?
+          Are you sure you would like to delete this deck?
           </h3>
           <div>
             <button className='minty-delete-button' onClick={handleDeleteDeck}>Yes, I'm sure</button>
