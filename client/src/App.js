@@ -15,6 +15,7 @@ import Header from "./components/Header.js";
 import Decks from "./components/Decks";
 import ViewDeck from "./components/ViewDeck";
 import ViewStudent from "./components/ViewStudent";
+import EditFlashcard from "./components/EditFlashcard";
 
 
 function App() {
@@ -50,6 +51,9 @@ function App() {
           </Route>
           <Route path="/students">
             <Students students={students} />
+          </Route>
+          <Route path="/decks/:id/flashcards/:id/edit">
+            <EditFlashcard />
           </Route>
           <Route path="/decks/:id">
             <ViewDeck />

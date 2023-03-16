@@ -11,12 +11,13 @@ body {
 .minty-button {
     font-size: 24px;
     color: #007f7f;
-    background-color: #bbdad8;
+    background: #bbdad8;
     font-weight: bold;
     align-self: flex-start;
     cursor: pointer;
     border: 2px solid #007f7f;
     border-radius: 5px;
+    margin-top: 15px;
 }
 
 .minty-button:hover {
@@ -39,9 +40,18 @@ body {
 
 .tiny-minty-delete-button {
     position: absolute;
-    top: 0;
-    right: -60px; /* Adjust this value based on the desired distance from the flashcard */
+    top: 15px;
+    right: -60px;
     font-size: 60px; 
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+.tiny-minty-edit-button {
+    position: absolute;
+    top: 0;
+    left: -60px; 
+    font-size: 55px; 
     background: transparent;
     border: none;
     cursor: pointer;
