@@ -19,7 +19,7 @@ function ViewStudent() {
 
   return (
     <div className="view-deck-container">
-      <div className="title">{[first_name, last_name]}</div>
+      <div className="title">{first_name} {last_name}</div>
       {assignments && assignments.length === 0 ? (
         <div>No assignments</div>
       ) : (

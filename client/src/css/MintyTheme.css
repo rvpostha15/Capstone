@@ -17,7 +17,7 @@ body {
     cursor: pointer;
     border: 2px solid #007f7f;
     border-radius: 5px;
-    margin-top: 15px;
+    margin: 15px;
 }
 
 .minty-button:hover {

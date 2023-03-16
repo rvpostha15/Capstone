@@ -16,6 +16,8 @@ import Decks from "./components/Decks";
 import ViewDeck from "./components/ViewDeck";
 import ViewStudent from "./components/ViewStudent";
 import EditFlashcard from "./components/EditFlashcard";
+import NewAssignment from "./components/NewAssignment";
+import Home from "./components/Home";
 
 
 function App() {
@@ -61,8 +63,16 @@ function App() {
           <Route path="/decks">
             <Decks decks={decks} />
           </Route>
+          <Route path="/new-assignment">
+            <NewAssignment 
+              students={students}
+              decks={decks}
+            />
+          </Route>
           <Route path="/">
-            <h1>Page Count: {currentTeacher.last_name}</h1>
+            <Home
+              currentTeacher={currentTeacher}
+            />
           </Route>
         </Switch>
       </div>
