@@ -1,27 +1,24 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { setDecks } from '../store/slices/deckSlice'
+import { setDecks, deleteDeck } from '../store/slices/deckSlice'
 import Flashcard from './Flashcard';
 import '../css/ViewDeck.css';
 import NewFlashcard from './NewFlashcard';
 
 function ViewDeck(props) {
+  const decks = useSelector((state) => state.deck.decks);
   const currentDeck = useSelector((state) => state.deck.currentDeck);
+  const flashcards = currentDeck.flashcards || [];
+  const dispatch = useDispatch();
   const currentTeacher = useSelector((state) => state.teacher.currentTeacher);
   const [newFlashcard, setNewFlashcard] = useState(false);
   const [isSure, setIsSure] = useState(false);
-  const flashcards = currentDeck.flashcards || [];
-  // const history = useHistory();
-  const dispatch = useDispatch();
+  const renderFlashcards = useSelector((state) => state.deck.currentDeck.flashcards || []);
 
-  const flashcardList = flashcards.map((flashcard) => (
+  const flashcardList = renderFlashcards.map((flashcard) => (
     <Flashcard key={flashcard.id} flashcard={flashcard} />
   ));
-  console.log("teacher:", currentTeacher.id,
-  "deck", currentDeck.teacher_id
-  )
-
 
   const toggleFlashcardForm = () => {
     setNewFlashcard(!newFlashcard)
@@ -36,20 +33,23 @@ function ViewDeck(props) {
   }
 
   const handleDeleteDeck = () => {
+    dispatch(deleteDeck(currentDeck.id));
     props.history.push('/decks')
-    // fetch(`/decks/${currentDeck.id}`,{
-    // method: 'DELETE'
-    // })
-    // .then(()=>)
   }
 
   return (
     <div className="view-deck-container">
       <h1 className="title">{currentDeck.title}</h1>
-      <button 
+      {currentDeck.teacher_id === currentTeacher.id ? (
+        <button 
         onClick={toggleFlashcardForm} 
         className='minty-button'
-      >Add FlashCard</button>
+        >Add FlashCard
+        </button>
+      ) : (
+        null
+      )}
+      
       {newFlashcard ? (
         <NewFlashcard/>
       ) : (
