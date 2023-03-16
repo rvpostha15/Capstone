@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { setDecks, deleteDeck } from '../store/slices/deckSlice'
@@ -9,14 +9,13 @@ import NewFlashcard from './NewFlashcard';
 function ViewDeck(props) {
   const decks = useSelector((state) => state.deck.decks);
   const currentDeck = useSelector((state) => state.deck.currentDeck);
-  const flashcards = currentDeck.flashcards || [];
+  const flashcards = useSelector((state) => state.flashcard.flashcards);
   const dispatch = useDispatch();
   const currentTeacher = useSelector((state) => state.teacher.currentTeacher);
   const [newFlashcard, setNewFlashcard] = useState(false);
   const [isSure, setIsSure] = useState(false);
-  const renderFlashcards = useSelector((state) => state.deck.currentDeck.flashcards || []);
 
-  const flashcardList = renderFlashcards.map((flashcard) => (
+  const flashcardList = flashcards.map((flashcard) => (
     <Flashcard key={flashcard.id} flashcard={flashcard} />
   ));
 

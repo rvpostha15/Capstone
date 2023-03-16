@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { addFlashcard, setCurrentDeck, updateCurrentDeck } from '../store/slices/deckSlice'
+import { setCurrentDeck, updateCurrentDeck } from '../store/slices/deckSlice'
+import { addFlashcard } from '../store/slices/flashcardSlice';
 
 function NewFlashcard() {
     const currentDeck = useSelector((state) => state.deck.currentDeck);
@@ -29,14 +30,10 @@ function NewFlashcard() {
         })
         .then(r => r.json())
         .then((newFlashcard) => {
-            dispatch(addFlashcard({ deckId: currentDeck.id, flashcard: newFlashcard }));
-            dispatch(updateCurrentDeck(newFlashcard));
+            dispatch(addFlashcard(newFlashcard));
             setFormData(initialFormData);
         })
-        .catch(error => (console.log(error)));
-        
-        
-        
+        .catch(error => (console.log(error))); 
     }
     
     return(
