@@ -16,12 +16,14 @@ class FlashcardsController < ApplicationController
     end
 
     def update
+        deck = find_deck
         flashcard = find_flashcard
         flashcard.update!(flashcard_params)
         render json: flashcard, status: :accepted
     end
 
-    def destroy 
+    def destroy
+        deck = find_deck
         flashcard = find_flashcard
         flashcard.destroy!
         head :no_content
@@ -29,8 +31,12 @@ class FlashcardsController < ApplicationController
 
     private 
 
+    def find_deck
+        Deck.find(params[:deck_id])
+    end
+
     def find_flashcard
-        Flashcard.find(params[:id])
+        Flashcard.find(params[:flashcard_id])
     end
 
     def flashcard_params
