@@ -1,10 +1,10 @@
-import { useSelector, useDispatch } from "react-redux";
-import { MdDeleteForever, MdOutlineEdit } from 'react-icons/md';
+import { useSelector } from "react-redux";
 import { useState } from "react";
+import { withRouter } from "react-router-dom";
 
-function EditFlashcard() {
+function EditFlashcard(props) {
+    const currentDeck = useSelector((state) => state.deck.currentDeck);
     const currentFlashcard = useSelector((state) => state.flashcard.currentFlashcard);
-    const dispatch = useDispatch();
     const initialFormData = {
         front: currentFlashcard.front,
         back: currentFlashcard.back,
@@ -18,8 +18,23 @@ function EditFlashcard() {
 
     const handleEditFlashcard = (e) => {
         e.preventDefault();
-        console.log('success!')
+        fetch(`/decks/${currentDeck.id}/flashcards/${currentFlashcard.id}`, {
+            method: 'PATCH',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(response => response.json())
+        .then(() => {
+            props.history.push(`/decks/${currentDeck.id}`)
+        })
+        .catch(error => {
+            console.error('Error updating flashcard:', error);
+        });
     }
+    
     return(
         <form className="flashcard" onSubmit={handleEditFlashcard}>
             <div className="front">
@@ -44,4 +59,4 @@ function EditFlashcard() {
         </form>
     )
 }
-export default EditFlashcard;
+export default withRouter(EditFlashcard);
