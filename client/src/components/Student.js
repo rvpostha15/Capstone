@@ -2,16 +2,14 @@ import "../css/MintyTheme.css";
 import { useDispatch } from 'react-redux';
 import { setCurrentStudent } from '../store/slices/studentSlice';
 
-function Student({ student }) {
+function Student({ student, onStudentSelect }) {
     const dispatch = useDispatch();
 
     const { first_name, last_name, full_name } = student
-    console.log(student)
-
-
 
     const handleClick = (e) => {
         dispatch(setCurrentStudent(student));
+        onStudentSelect(student)
     };
 
     return(
