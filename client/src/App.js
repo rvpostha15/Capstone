@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setDecks } from './store/slices/deckSlice';
 import { setCurrentTeacher } from './store/slices/teacherSlice';
 import { setStudents } from "./store/slices/studentSlice";
+// import { setAssignments } from "./store/slices/assignmentSlice";
 
 // Components & CSS
 import "./css/MintyTheme.css";
@@ -26,6 +27,7 @@ function App() {
   const decks = useSelector((state) => state.deck.decks);
   // const currentDeck = useSelector((state) => state.deck.currentDeck);
   const students = useSelector((state) => state.student.students)
+  // const assignments = useSelector((state) => state.assignment.assignments)
   
   // Fetch Teacher 3 => NEED TO UPDATE TO FETCH LOGGED IN TEACHER!!
   useEffect(() => {
@@ -36,6 +38,7 @@ function App() {
         dispatch(setStudents(data.students))
       });
   }, [dispatch]);
+
 
   useEffect(() => {
     fetch('/decks')

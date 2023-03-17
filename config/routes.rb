@@ -8,13 +8,12 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  get '/hello', to: 'application#hello_world'
+  # get '/hello', to: 'application#hello_world'
 
   post '/decks/:deck_id/flashcards', to: 'flashcards#create'
   delete '/decks/:deck_id/flashcards/:flashcard_id', to: 'flashcards#destroy'
   patch '/decks/:deck_id/flashcards/:flashcard_id', to: 'flashcards#update'
  
-
   delete '/decks/:deck_id', to: 'decks#destroy'
 
   get '*path',
