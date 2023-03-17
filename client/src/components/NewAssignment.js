@@ -1,35 +1,73 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import Deck from "./Deck";
 import Student from "./Student";
 
 function NewAssignment({ decks, students }) {
+    const currentTeacher = useSelector((state) => state.teacher.currentTeacher);
 
     const [showForm, setShowForm] = useState(false)
     const [deckAssigned, setDeckAssigned] = useState(false)
     const [studentAssigned, setStudentAssigned] = useState(false)
+    const [studentId, setStudentId] = useState(null)
+    const [deckId, setDeckId] = useState(null)
+
+    let formData = {
+        teacher_id: currentTeacher.id,
+        student_id: studentId,
+        deck_id: deckId,
+        complete: false
+    }
+    console.log("formData:", formData)
+    console.log("teacherId:", currentTeacher.id)
+    console.log("studentId:", studentId)
+    console.log("deckId:", deckId)
     
     const toggleForm = () => {
-        setShowForm(!showForm)
+        setShowForm(true)
+    }
+
+    const cancelAssignment = () => {
+        setShowForm(false)
         setDeckAssigned(false)
         setStudentAssigned(false)
+        setDeckId(null)
+        setStudentId(null)
     }
 
     const toggleDeckAssigned = (deck) => {
         setDeckAssigned(true);
         console.log("deck:", deck);
+        setDeckId(deck.id)
     };
 
     const toggleStudentAssigned = (student) => {
         setStudentAssigned(true);
         console.log("student:", student);
+        setStudentId(student.id)
     };
 
     const submitAssignment = () => {
-        setShowForm(false);
-        setDeckAssigned(false);
-        setStudentAssigned(false);
-        console.log("submitted!");
-    };
+
+
+        fetch('/assignments', {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(r => r.json())
+        .then((data) => {
+            console.log(data);
+            setShowForm(false);
+            setDeckAssigned(false);
+            setStudentAssigned(false);
+            window.location.reload();
+        })
+        .catch(error => (console.log(error))); 
+    }
 
     return (
     <>
@@ -55,7 +93,7 @@ function NewAssignment({ decks, students }) {
             </>
             )}
             <button
-                onClick={toggleForm}
+                onClick={cancelAssignment}
                 className="minty-delete-button"
             >
             Cancel
