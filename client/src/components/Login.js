@@ -61,14 +61,16 @@ const Login = ({onLoginSuccess}) => {
       headers: {
           'Content-Type': 'application/json'
       },
-      body: JSON.stringify(formData)
+      body: JSON.stringify({teacher: formData})
     })
     .then(r => {
       if (r.ok) {
         return r.json();
       } else {
-        throw new Error('Failed to create new account')
-      }
+        return r.json().then((error) => {
+          throw error;
+        })
+      } 
     })
     .then((data) => console.log(data))
     .catch(error => {

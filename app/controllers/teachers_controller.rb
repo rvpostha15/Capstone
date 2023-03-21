@@ -11,10 +11,21 @@ class TeachersController < ApplicationController
         render json: teacher, include: {students: {include: :assignments}}, status: :ok
     end
 
-    def create 
-        teacher = Teacher.create!(teacher_params)
-        render json: teacher, status: :created
+    # def create 
+    #     teacher = Teacher.create!(teacher_params)
+    #     TeacherMailer.welcome_email(teacher).deliver_now
+    #     render json: teacher, status: :created
+    # end
+    def create
+        teacher = Teacher.new(teacher_params)
+        if teacher.save
+          TeacherMailer.welcome_email(teacher).deliver_now
+          render json: teacher, status: :created
+        else
+          render json: { errors: teacher.errors }, status: :unprocessable_entity
+        end
     end
+      
 
     private 
 
@@ -23,6 +34,6 @@ class TeachersController < ApplicationController
     end
 
     def teacher_params
-        params.permit(:lehrer, :first_name, :last_name, :username, :email, :password, :password_confirmation)
+        params.require(:teacher).permit(:lehrer, :first_name, :last_name, :username, :email, :password, :password_confirmation)
     end
 end
