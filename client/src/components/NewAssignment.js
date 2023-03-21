@@ -47,8 +47,8 @@ function NewAssignment({ decks, students }) {
         setStudentId(student.id)
     };
 
-    const submitAssignment = () => {
-
+    const submitAssignment = (e) => {
+        
 
         fetch('/assignments', {
             method: 'POST',

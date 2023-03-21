@@ -1,5 +1,5 @@
 class TeacherSerializer < ActiveModel::Serializer
-  attributes :id, :lehrer, :first_name, :last_name, :username, :email, :password_digest, :students
+  attributes :id, :lehrer, :first_name, :last_name, :username, :email, :password, :password_confirmation, :students
 
   # Define a custom method called students_with_assignments
   def students
