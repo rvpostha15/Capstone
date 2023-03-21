@@ -11,9 +11,10 @@ Rails.application.routes.draw do
   # root "articles#index"
   # get '/hello', to: 'application#hello_world'
 
-  
+
 
   get '/auth', to: 'users#find_current_user'
+  get '/current_teacher', to: 'sessions#current_logged_in_teacher'
 
   post '/decks/:deck_id/flashcards', to: 'flashcards#create'
   delete '/decks/:deck_id/flashcards/:flashcard_id', to: 'flashcards#destroy'

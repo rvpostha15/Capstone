@@ -37,6 +37,24 @@ function App() {
         dispatch(setStudents(data.students))
       });
   };
+  useEffect(()=> {
+    fetch('/current_teacher')
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Not logged in');
+      }
+    })
+    .then((data) => {
+      dispatch(setCurrentTeacher(data));
+      dispatch(setStudents(data.students));
+      setIsAuthenticated(true);
+    })
+    .catch((error) => {
+      console.error('Error fetching current teacher:', error);
+    });
+  }, []);
 
   useEffect(() => {
     fetch('/decks')
@@ -74,6 +92,7 @@ function App() {
           <Route path="/">
             <Home
               currentTeacher={currentTeacher}
+              setIsAuthenticated={setIsAuthenticated}
             />
           </Route>
         </Switch>
