@@ -1,6 +1,7 @@
 import "../css/MintyTheme.css";
 import { useDispatch } from 'react-redux';
 import { setCurrentStudent } from '../store/slices/studentSlice';
+// import { setAssignments } from "../store/slices/assignmentSlice";
 
 function Student({ student, onStudentSelect }) {
     const dispatch = useDispatch();
@@ -9,6 +10,7 @@ function Student({ student, onStudentSelect }) {
 
     const handleClick = (e) => {
         dispatch(setCurrentStudent(student));
+        console.log("student", student)
         onStudentSelect(student)
     };
 
