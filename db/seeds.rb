@@ -2,15 +2,27 @@ puts "🌱 Planting seeds..."
 
 # Teachers
 3.times do
-    Teacher.create!(
-      lehrer: true,
-      first_name: Faker::Name.first_name,
-      last_name: Faker::Name.last_name,
-      username: Faker::Internet.username,
-      email: Faker::Internet.email,
-      password: "password"
-    )
-  end
+  Teacher.create!(
+    lehrer: true,
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    username: Faker::Internet.username,
+    email: Faker::Internet.email,
+    password: "password",
+    password_confirmation: "password"
+  )
+end
+
+Teacher.create!(
+  lehrer: true,
+  first_name: "Ron",
+  last_name: "Post",
+  username: "rvpostha15",
+  email: "ron123@ron.com",
+  password: "ron123",
+  password_confirmation: "ron123"
+)
+
   
   # Students
 

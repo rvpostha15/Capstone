@@ -1,13 +1,11 @@
-// client/src/components/App.js
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-//Redux
+// Redux
 import { useSelector, useDispatch } from 'react-redux';
 import { setDecks } from './store/slices/deckSlice';
 import { setCurrentTeacher } from './store/slices/teacherSlice';
 import { setStudents } from "./store/slices/studentSlice";
-// import { setAssignments } from "./store/slices/assignmentSlice";
 
 // Components & CSS
 import "./css/MintyTheme.css";
@@ -19,26 +17,26 @@ import ViewStudent from "./components/ViewStudent";
 import EditFlashcard from "./components/EditFlashcard";
 import NewAssignment from "./components/NewAssignment";
 import Home from "./components/Home";
-
+import Login from "./components/Login"; // Import the Login component
 
 function App() {
   const dispatch = useDispatch();
   const currentTeacher = useSelector((state) => state.teacher.currentTeacher);
   const decks = useSelector((state) => state.deck.decks);
-  // const currentDeck = useSelector((state) => state.deck.currentDeck);
   const students = useSelector((state) => state.student.students)
-  // const assignments = useSelector((state) => state.assignment.assignments)
-  
+
+  // Add this state
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   // Fetch Teacher 3 => NEED TO UPDATE TO FETCH LOGGED IN TEACHER!!
-  useEffect(() => {
-    fetch('/teachers/3')
+  const fetchLoggedInTeacher = (teacherId) => {
+    fetch(`/teachers/${teacherId}`)
       .then((r) => r.json())
       .then((data) => {
         dispatch(setCurrentTeacher(data))
         dispatch(setStudents(data.students))
       });
-  }, [dispatch]);
-
+  };
 
   useEffect(() => {
     fetch('/decks')
@@ -46,7 +44,8 @@ function App() {
       .then((data) => dispatch(setDecks(data)));
   }, [dispatch]);
 
-  return (
+  // Conditionally render the Login component or the rest of your application
+  return isAuthenticated ? (
     <BrowserRouter>
       <Header />
       <div className="content">
@@ -80,6 +79,11 @@ function App() {
         </Switch>
       </div>
     </BrowserRouter>
+  ) : (
+    <Login onLoginSuccess={(teacherId) => {
+      setIsAuthenticated(true)
+      fetchLoggedInTeacher(teacherId)
+    }}/>
   );
 }
 
