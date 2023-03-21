@@ -21,9 +21,11 @@ function ViewStudent() {
     <div className="view-deck-container">
       <div className="title">{first_name} {last_name}</div>
       {assignments && assignments.length === 0 ? (
-        <div>No assignments</div>
+        <div className='errors'>No assignments</div>
       ) : (
-        assignmentList
+        <div className='grid-container'>
+        {assignmentList}
+        </div>
       )}
     </div>
   );

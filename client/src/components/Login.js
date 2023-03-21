@@ -5,6 +5,8 @@ const Login = ({onLoginSuccess}) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [signUpForm, setSignUpForm] = useState(false)
+  const [signUpErrors, setSignUpErrors] = useState('');
+
   const initialFormData = {
     lehrer: true,
     first_name: '',
@@ -65,23 +67,32 @@ const Login = ({onLoginSuccess}) => {
     })
     .then(r => {
       if (r.ok) {
+        setSignUpForm(false) 
         return r.json();
       } else {
         return r.json().then((error) => {
           throw error;
         })
-      } 
+      }  
     })
-    .then((data) => console.log(data))
-    .catch(error => {
+    .then((data) => {
+      console.log(data)
+    })
+    .catch((error) => {
       console.log(error);
-      if (error.r){
-        error.r.json().then(errors => {
-          console.log(errors);
+      const formattedErrors = [];
+      for (const key in error.errors) {
+        error.errors[key].forEach((errorMessage) => {
+          formattedErrors.push(`${key} ${errorMessage}`);
         });
       }
-    }); 
+      setSignUpErrors(formattedErrors);
+    });
   }
+  
+    
+     
+  
   
   
 
@@ -93,13 +104,22 @@ const Login = ({onLoginSuccess}) => {
       <form onSubmit={handleSubmit}>
         <div>
           <label  >Email: </label>
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          <input 
+            type="email" 
+            value={email} 
+            onChange={(e) => setEmail(e.target.value)} required 
+          />
         </div>
         <div>
           <label>Password: </label>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+          <input 
+            type="password" 
+            value={password} 
+            onChange={(e) => setPassword(e.target.value)} required 
+          />
         </div>
-        {error && <p>{error}</p>}
+        {/* Conditionally Display Login Error */}
+        {error && <li className='errors'>{error}</li>}
       </form>
         <button className='minty-button' type="submit" onClick={handleSubmit}>Login</button>
         <button className='minty-button' onClick={toggleSignupForm}>Sign-Up</button>
@@ -156,8 +176,16 @@ const Login = ({onLoginSuccess}) => {
             value = {formData.password_confirmation}
             onChange = {handleChange}
           />
+          {/* Conditionally Display SignUp Errors */}
           <input className='minty-button' type='submit' value='Sign-Up'/>
         </form>
+          {signUpErrors.length > 0 && (
+            <ul>
+              {signUpErrors.map((error, index) => (
+                <li className='errors' key={index}>{error}</li>
+              ))}
+            </ul>
+          )}
         <div>
           <h2>Already have an account?</h2>
           <button className='minty-button' onClick={cancelSignUp}>Login</button>

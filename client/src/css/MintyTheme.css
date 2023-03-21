@@ -69,9 +69,19 @@ body {
     color: #00cc66;
 }
 
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    padding: 10px;
+}
+
 .assignment {
     background-color: #ff9696;
     padding: 20px;
+    margin: 5px;
+    min-height: 150px;
+    min-width: 200px;
 }
 
 .assignment.complete {
@@ -104,4 +114,13 @@ body {
 
 .content a:hover {
     background-color: #91ebe3;
+}
+
+.errors {
+    color: #db7272;
+    margin: 10px;
+}
+
+.minty-highlight.checkmark {
+    font-size: 40px;
 }
