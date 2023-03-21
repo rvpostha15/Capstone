@@ -6,6 +6,7 @@ const Login = ({onLoginSuccess}) => {
   const [error, setError] = useState('');
   const [signUpForm, setSignUpForm] = useState(false)
   const initialFormData = {
+    lehrer: true,
     first_name: '',
     last_name: '',
     username: '',
@@ -15,7 +16,7 @@ const Login = ({onLoginSuccess}) => {
   }
 
   const [formData, setFormData] = useState(initialFormData);
-  console.log(formData)
+  console.log("formdata:", formData)
 
   const handleChange = (e) => {
       setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -52,9 +53,35 @@ const Login = ({onLoginSuccess}) => {
     setSignUpForm(false)
   }
 
-  const handleCreateNewTeacher = () => {
-    console.log('sign me up!')
+  const handleNewUser = (e) => {
+    e.preventDefault()
+    fetch('/teachers', {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
+    .then(r => {
+      if (r.ok) {
+        return r.json();
+      } else {
+        throw new Error('Failed to create new account')
+      }
+    })
+    .then((data) => console.log(data))
+    .catch(error => {
+      console.log(error);
+      if (error.r){
+        error.r.json().then(errors => {
+          console.log(errors);
+        });
+      }
+    }); 
   }
+  
+  
 
   return (
     <>
@@ -78,7 +105,7 @@ const Login = ({onLoginSuccess}) => {
     ) : (
       <div className='content'>
         <h1>SignUp</h1>
-        <form onSubmit={handleCreateNewTeacher}>
+        <form onSubmit={handleNewUser}>
           <label>First Name: </label>
           <input
             type = 'text'
@@ -92,7 +119,7 @@ const Login = ({onLoginSuccess}) => {
             type = 'text'
             name = 'last_name'
             placeholder= 'Last Name'
-            value = {formData.value}
+            value = {formData.last_name}
             onChange = {handleChange}
           />
           <label>Username: </label>
@@ -105,7 +132,7 @@ const Login = ({onLoginSuccess}) => {
           />
           <label>Email: </label>
           <input
-            type = 'text'
+            type = 'email'
             name = 'email'
             placeholder= 'Email Address'
             value = {formData.email}
@@ -113,7 +140,7 @@ const Login = ({onLoginSuccess}) => {
           />
           <label>Password: </label>
           <input
-            type = 'text'
+            type = 'password'
             name = 'password'
             placeholder= 'Password'
             value = {formData.password}
@@ -121,12 +148,13 @@ const Login = ({onLoginSuccess}) => {
           />
           <label>Confirm Password: </label>
           <input
-            type = 'text'
+            type = 'password'
             name = 'password_confirmation'
             placeholder= 'Confirm password'
             value = {formData.password_confirmation}
             onChange = {handleChange}
           />
+          <input className='minty-button' type='submit' value='Sign-Up'/>
         </form>
         <div>
           <h2>Already have an account?</h2>

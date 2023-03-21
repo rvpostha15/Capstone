@@ -48,8 +48,6 @@ function NewAssignment({ decks, students }) {
     };
 
     const submitAssignment = (e) => {
-        
-
         fetch('/assignments', {
             method: 'POST',
             mode: 'cors',
