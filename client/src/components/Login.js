@@ -65,14 +65,19 @@ const Login = ({onLoginSuccess}) => {
     })
     .then(r => {
       if (r.ok) {
+        setSignUpForm(false) 
         return r.json();
       } else {
         return r.json().then((error) => {
           throw error;
         })
-      } 
+      }
+      
     })
-    .then((data) => console.log(data))
+    .then((data) => {
+      console.log(data)
+      // setSignUpForm(false)
+    })
     .catch(error => {
       console.log(error);
       if (error.r){
