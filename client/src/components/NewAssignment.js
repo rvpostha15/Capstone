@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Deck from "./Deck";
 import Student from "./Student";
+import { addAssignment } from "../store/slices/assignmentSlice";
 
-function NewAssignment({ decks, students }) {
+function NewAssignment({ decks, students, fetchCurrentTeacher }) {
     const currentTeacher = useSelector((state) => state.teacher.currentTeacher);
+    const dispatch = useDispatch();
 
     const [showForm, setShowForm] = useState(false)
     const [deckAssigned, setDeckAssigned] = useState(false)
@@ -47,7 +49,7 @@ function NewAssignment({ decks, students }) {
         setStudentId(student.id)
     };
 
-    const submitAssignment = (e) => {
+    const submitAssignment = () => {
         fetch('/assignments', {
             method: 'POST',
             mode: 'cors',
@@ -57,12 +59,13 @@ function NewAssignment({ decks, students }) {
             body: JSON.stringify(formData)
         })
         .then(r => r.json())
-        .then((data) => {
-            console.log(data);
+        .then((NewAssignment) => {
+            dispatch(addAssignment(NewAssignment));
             setShowForm(false);
             setDeckAssigned(false);
             setStudentAssigned(false);
-            window.location.reload();
+            fetchCurrentTeacher();
+            // window.location.reload();
         })
         .catch(error => (console.log(error))); 
     }

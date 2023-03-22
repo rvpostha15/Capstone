@@ -37,7 +37,8 @@ function App() {
         dispatch(setStudents(data.students))
       });
   };
-  useEffect(()=> {
+
+  const fetchCurrentTeacher = () => {
     fetch('/current_teacher')
     .then((response) => {
       if (response.ok) {
@@ -54,6 +55,10 @@ function App() {
     .catch((error) => {
       console.error('Error fetching current teacher:', error);
     });
+  }
+  
+  useEffect(()=> {
+    fetchCurrentTeacher();
   }, []);
 
   useEffect(() => {
@@ -87,6 +92,7 @@ function App() {
             <NewAssignment 
               students={students}
               decks={decks}
+              fetchCurrentTeacher={fetchCurrentTeacher}
             />
           </Route>
           <Route path="/">
