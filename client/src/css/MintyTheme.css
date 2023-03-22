@@ -38,6 +38,10 @@ body {
     background-color: #ff9696;
 }
 
+.min-height {
+    min-height: 185px;
+}
+
 .tiny-minty-delete-button {
     position: absolute;
     top: 15px;

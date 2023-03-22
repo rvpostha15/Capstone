@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setCurrentDeck, updateCurrentDeck } from '../store/slices/deckSlice'
 import { addFlashcard } from '../store/slices/flashcardSlice';
 
-function NewFlashcard() {
+function NewFlashcard({toggleFlashcardForm}) {
     const currentDeck = useSelector((state) => state.deck.currentDeck);
     const dispatch = useDispatch();
     const initialFormData = {
@@ -12,6 +12,7 @@ function NewFlashcard() {
         deck_id: currentDeck.id,
     }
     const [formData, setFormData] = useState(initialFormData);
+    const [newFlashcardErrors, setNewFlashcardErrors] = useState([])
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -28,12 +29,25 @@ function NewFlashcard() {
             },
             body: JSON.stringify(formData)
         })
-        .then(r => r.json())
+        .then(r => {
+            if (r.ok) {
+                toggleFlashcardForm(false);
+              return r.json();
+            } else {
+              return r.json().then((error) => {
+                throw error;
+              })
+            }  
+          })
         .then((newFlashcard) => {
             dispatch(addFlashcard(newFlashcard));
             setFormData(initialFormData);
+
         })
-        .catch(error => (console.log(error))); 
+        .catch((error) => {
+            console.log(error);
+            setNewFlashcardErrors(error.errors);
+        });
     }
     
     return(
@@ -41,7 +55,8 @@ function NewFlashcard() {
             <form onSubmit={handleCreateFlashcard}>
                 <div>
                     <h2>Front: </h2>
-                    <input 
+                    <input
+                        className='input-field' 
                         type='text'
                         name='front' 
                         placeholder='front' 
@@ -49,7 +64,8 @@ function NewFlashcard() {
                         onChange={handleChange}
                     />
                     <h2>Back: </h2>
-                    <input 
+                    <input
+                        className='input-field' 
                         type='text'
                         name='back' 
                         placeholder='back' 
@@ -57,6 +73,13 @@ function NewFlashcard() {
                         onChange={handleChange}
                     />
                     <input className='minty-button' type='submit' value="Create"/>
+                    {newFlashcardErrors.length > 0 && (
+                        <ul>
+                            {newFlashcardErrors.map((error, index) => (
+                                <li className='errors' key={index}>{error}</li>
+                            ))}
+                        </ul>
+                    )}
                 </div>
             </form>
         </div>

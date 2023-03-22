@@ -70,7 +70,7 @@ function ViewDeck(props) {
       )}
       
       {newFlashcard ? (
-        <NewFlashcard/>
+        <NewFlashcard toggleFlashcardForm={toggleFlashcardForm}/>
       ) : (
         null
       )}

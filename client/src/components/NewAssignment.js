@@ -65,7 +65,6 @@ function NewAssignment({ decks, students, fetchCurrentTeacher }) {
             setDeckAssigned(false);
             setStudentAssigned(false);
             fetchCurrentTeacher();
-            // window.location.reload();
         })
         .catch(error => (console.log(error))); 
     }
@@ -95,7 +94,7 @@ function NewAssignment({ decks, students, fetchCurrentTeacher }) {
                 <div className="grid-container">
                 {students.map((student) => (
                 <button 
-                    className={`minty-button ${studentId === student.id ? 'selected': null}`} 
+                    className={`minty-button min-height ${studentId === student.id ? 'selected': null}`} 
                     key={student.id}
                     onClick={()=> toggleStudentAssigned(student)}
                 >
