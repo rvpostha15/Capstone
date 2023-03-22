@@ -74,20 +74,32 @@ function NewAssignment({ decks, students }) {
         </button>
         {showForm ? (
         <>
-            <div>Select a deck to assign</div>
+            <h2>Select a deck to assign</h2>
+            <div className="grid-container">
             {decks.map((deck) => (
-            <button className="minty-button" key={deck.id}>
-                <Deck deck={deck} onDeckSelect={toggleDeckAssigned} />
-            </button>
+                    <button 
+                        className={`minty-button ${deckId === deck.id ? 'selected' : null}`} 
+                        key={deck.id}
+                        onClick={()=> toggleDeckAssigned(deck)}
+                    >
+                        <Deck deck={deck}/>
+                    </button>
             ))}
+            </div>
             {deckAssigned && (
             <>
-                <div>Select a student to assign</div>
+                <h2>Select a student to assign</h2>
+                <div className="grid-container">
                 {students.map((student) => (
-                <button className="minty-button" key={student.id}>
-                    <Student student={student} onStudentSelect={toggleStudentAssigned}/>
+                <button 
+                    className={`minty-button ${studentId === student.id ? 'selected': null}`} 
+                    key={student.id}
+                    onClick={()=> toggleStudentAssigned(student)}
+                >
+                    <Student student={student}/>
                 </button>
                 ))}
+                </div>
             </>
             )}
             <button

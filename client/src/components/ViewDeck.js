@@ -58,7 +58,7 @@ function ViewDeck(props) {
 
   return (
     <div className="view-deck-container">
-      <h1 className="title">{currentDeck.title}</h1>
+      <div className="title">{currentDeck.title}</div>
       {currentDeck.teacher_id === currentTeacher.id ? (
         <button 
         onClick={toggleFlashcardForm} 

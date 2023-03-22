@@ -14,7 +14,7 @@
     display: block;
     color: #007f7f;
     font-family: 'Roboto Slab', serif;
-    font-size: 18px;
+    font-size: 25px;
     margin: 15px 0;
     padding: 10px;
     text-decoration: none;
@@ -26,6 +26,6 @@
 
 /* Active link styles */
 .vertical-menu .item.active {
-    background-color: #91ebe3;
+    background-color: #58e69f;
     font-weight: bold;
 }
