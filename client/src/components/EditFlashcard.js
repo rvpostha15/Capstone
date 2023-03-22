@@ -11,6 +11,7 @@ function EditFlashcard(props) {
         deck_id: currentFlashcard.deck_id,
     }
     const [formData, setFormData] = useState(initialFormData);
+    const [editErrors, setEditErrors] = useState([])
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -26,13 +27,24 @@ function EditFlashcard(props) {
             },
             body: JSON.stringify(formData)
         })
-        .then(response => response.json())
-        .then(() => {
-            props.history.push(`/decks/${currentDeck.id}`)
-        })
+        .then(r => {
+            if (r.ok) {
+                props.history.push(`/decks/${currentDeck.id}`)
+              return r.json();
+            } else {
+              return r.json().then((error) => {
+                throw error;
+              })
+            }  
+          })
         .catch(error => {
-            console.error('Error updating flashcard:', error);
+            console.error(error);
+            setEditErrors(error.errors)
         });
+    }
+
+    const handleCancel = () => {
+        props.history.push(`/decks/${currentDeck.id}`)
     }
     
     return(
@@ -40,6 +52,7 @@ function EditFlashcard(props) {
             <div className="front">
                 <h2>Front: </h2>
                 <input
+                    className='input-field'
                     type='text'
                     name='front'
                     value={formData.front}
@@ -49,12 +62,21 @@ function EditFlashcard(props) {
             <div className="back">
                 <h2>Back: </h2>
                 <input
+                    className='input-field'
                     type='text'
                     name='back'
                     value={formData.back}
                     onChange={handleChange}
                 />
+            <button className="minty-delete-button" onClick={handleCancel}>Cancel</button>
             <input className='minty-button' type='submit' value="Confirm Edit"/>
+            {editErrors.length > 0 && (
+                <ul>
+                    {editErrors.map((error, index) => (
+                        <li className='errors' key={index}>{error}</li>
+                    ))}
+                </ul>
+            )}
             </div>
         </form>
     )
