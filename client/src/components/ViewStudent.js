@@ -24,7 +24,7 @@ function ViewStudent() {
         <div className='errors'>No assignments</div>
       ) : (
         <div className='grid-container'>
-        {assignmentList}
+          {assignmentList}
         </div>
       )}
     </div>

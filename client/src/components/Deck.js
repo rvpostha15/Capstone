@@ -10,7 +10,7 @@ function Deck({ deck, onDeckSelect }) {
   const handleClick = (e) => {
     dispatch(setCurrentDeck(deck));
     dispatch(setFlashcards(deck.flashcards));
-    onDeckSelect(deck)
+    // onDeckSelect(deck)
   };
 
   return (

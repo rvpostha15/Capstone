@@ -9,11 +9,11 @@ function Decks({ decks }) {
     const [newDeck, setNewDeck] = useState(false)
 
     const deck = decks.map((deck)=> (
-        <Link to = {`/decks/${deck.id}`} key = {deck.id}>
-            <Deck
-                deck = {deck}
-            />
-        </Link>
+            <Link className="deck" to = {`/decks/${deck.id}`} key = {deck.id}>
+                <Deck
+                    deck = {deck}
+                />
+            </Link>
     ))
 
     const toggleCreateNewDeck = () => {
@@ -22,7 +22,9 @@ function Decks({ decks }) {
 
     return(
         <>
-            <div>{deck}</div>
+            <div className="grid-container">
+                {deck}
+            </div>
             <button 
                 onClick={toggleCreateNewDeck}
                 className="minty-button"

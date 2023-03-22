@@ -11,15 +11,13 @@
   .title {
     font-size: 64px;
     font-weight: bold;
-    align-self: flex-start;
+    align-self: center;
     margin-bottom: 20px;
     color: #007f7f;
     /* box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     padding: 10px; */
   }
 
-
-  
   .flashcard {
     position: relative;
     display: inline-block;
@@ -34,6 +32,8 @@
     padding: 20px;
     width: 300px;
     text-align: center;
+    color: #007f7f;
+    font-weight: bold;
   }
   
   .flashcard .front {

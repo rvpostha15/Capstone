@@ -84,6 +84,30 @@ body {
     min-width: 200px;
 }
 
+.deck {
+    background: #bbdad8;
+    text-align: center;
+}
+
+.student {
+    background: #bbdad8;
+    text-align: left;
+    margin-left: 50px;
+    margin-bottom: 30px;
+    max-width: 400px;
+    padding-left: 20px;
+    /* min-height: 100px; */
+}
+
+.student :hover {
+    background-color: #91ebe3;
+}
+
+.student-box {
+    margin-top: 50px;
+    margin-left: 15px;
+}
+
 .assignment.complete {
     background-color: #8ce8b7;
 }
@@ -101,11 +125,11 @@ body {
 .content label {
     color: #007f7f;
 }
-.content h1:hover,  
+/* .content h1:hover,  
 .content p:hover {
     color: #007f7f;
     background-color: #91ebe3;
-}
+} */
 
 .content a {
     color: #007f7f;
@@ -123,4 +147,43 @@ body {
 
 .minty-highlight.checkmark {
     font-size: 40px;
+}
+
+.selected {
+    background-color: #58e69f;;
+}
+
+.login {
+    font-size: large;
+    font-weight: bold;
+    margin:5px;
+    /* max-width: 4000px; */
+    white-space: nowrap;
+}
+
+.login-container {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 25%;
+    padding: 10px;
+    max-width: 150px;
+    align-items: center;
+}
+
+.input-field {
+    font-size: large;
+    /* font-weight: bold; */
+    margin:5px;
+}
+
+.off-center {
+    /* text-align: center; */
+    margin-left: 23.5%;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 25%;
 }
