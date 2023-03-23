@@ -24,6 +24,7 @@ import Login from "./components/Login";
 
 // Student Components 
 import StudentDashboard from "./components/StudentDashboard";
+import Study from "./components/Study"
 import "./css/MintyTheme.css";
 
 function App(props) {
@@ -146,6 +147,9 @@ function App(props) {
                 currentStudent={currentStudent}
                 assignments={assignments}
               />
+            </Route>
+            <Route path="/assignments/study/:id">
+              <Study />
             </Route>
           </Switch>
         )}

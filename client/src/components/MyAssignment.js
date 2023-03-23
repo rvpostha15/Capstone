@@ -1,14 +1,22 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setCurrentDeck } from '../store/slices/deckSlice';
+import { setFlashcards } from '../store/slices/flashcardSlice';
 
 function MyAssignment({assignment}) {
+    const dispatch = useDispatch();
     const decks = useSelector((state) => state.deck.decks);
     const deck = decks.find((deck) => deck.id === assignment.deck_id)
 
     const complete = assignment.complete
     // console.log("complete", complete)
 
+    const handleClick = (e) => {
+        dispatch(setCurrentDeck(deck));
+        dispatch(setFlashcards(deck.flashcards));
+    };
+
     return(
-        <>
+        <div onClick={handleClick} >
             {complete ? (
                 <div className="assignment complete">
                     <h1>{deck.title}</h1>
@@ -20,7 +28,7 @@ function MyAssignment({assignment}) {
                     <h2>Incomplete</h2>
                 </div>
             )}
-        </>
+        </div>
     )
 }
 

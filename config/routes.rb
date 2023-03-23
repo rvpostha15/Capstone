@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :teachers, path: 'teachers', controllers: { registrations: 'lehrer/teachers' }
   devise_for :students, path: 'students', controllers: { registrations: 'students' }  
   resources :flashcards, only: [:index, :show, :create, :update, :destroy]
-  resources :assignments, only: [:index, :show, :create, :destroy]
+  resources :assignments, only: [:index, :show, :create, :update, :destroy]
   resources :decks, only: [:index, :show, :create, :destroy]
   resources :students, only: [:index, :show, :create]
   resources :teachers, only: [:index, :show, :create]
@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   post '/decks/:deck_id/flashcards', to: 'flashcards#create'
   delete '/decks/:deck_id/flashcards/:flashcard_id', to: 'flashcards#destroy'
   patch '/decks/:deck_id/flashcards/:flashcard_id', to: 'flashcards#update'
+
+  patch '/assignments/study/:id', to: 'assignments#update'
 
   # post '/', to: 'teachers#create'
  

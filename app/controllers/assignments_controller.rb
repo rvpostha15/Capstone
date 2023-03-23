@@ -15,6 +15,12 @@ class AssignmentsController < ApplicationController
         render json: assignment, status: :created
     end
 
+    def update
+        assignment = find_assignment
+        assignment.update!(assignment_params)
+        render json: assignment, status: :accepted
+    end
+
     def destroy 
         assignment = find_assignment
         assignment.destroy!
