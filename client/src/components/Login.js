@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { withRouter } from 'react-router-dom';
 
 
 const Login = ({onTeacherLoginSuccess, onStudentLoginSuccess}) => {
@@ -8,6 +9,7 @@ const Login = ({onTeacherLoginSuccess, onStudentLoginSuccess}) => {
   const [error, setError] = useState('');
   const [signUpForm, setSignUpForm] = useState(false)
   const [signUpErrors, setSignUpErrors] = useState('');
+  // const history = useHistory();
 
   const initialFormData = {
     lehrer: true,
@@ -215,4 +217,4 @@ const Login = ({onTeacherLoginSuccess, onStudentLoginSuccess}) => {
   );
 };
 
-export default Login;
+export default withRouter(Login);

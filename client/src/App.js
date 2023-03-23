@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, withRouter } from "react-router-dom";
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux';
@@ -26,7 +26,7 @@ import Login from "./components/Login";
 import StudentDashboard from "./components/StudentDashboard";
 import "./css/MintyTheme.css";
 
-function App() {
+function App(props) {
   const dispatch = useDispatch();
   const currentTeacher = useSelector((state) => state.teacher.currentTeacher);
   const decks = useSelector((state) => state.deck.decks);
@@ -34,7 +34,7 @@ function App() {
   const currentStudent = useSelector((state) => state.student.currentStudent)
   const assignments = useSelector((state) => state.assignment.assignments)
 
-  // Add this state
+  // State
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userType, setUserType] = useState('')
 
@@ -141,12 +141,12 @@ function App() {
           </>
         ) : (
           <Switch>
-            {/* <Route path="/student-dashboard"> */}
+            <Route path="/student-dashboard">
               <StudentDashboard 
                 currentStudent={currentStudent}
                 assignments={assignments}
               />
-            {/* </Route> */}
+            </Route>
           </Switch>
         )}
       </>
@@ -160,10 +160,11 @@ function App() {
       onStudentLoginSuccess={(studentId) => {
         setIsAuthenticated(true)
         fetchLoggedInStudent(studentId)
+        props.history.push('/student-dashboard')
       }}
     />
   );
   
 }  
 
-export default App;
+export default withRouter(App);
