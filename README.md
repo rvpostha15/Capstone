@@ -130,6 +130,7 @@ Assignments: A join table to track which decks are assigned to which students. T
 - Connect to an external API (to be determined) to import decks that others have created on other platforms
 
 ## Known Bugs or Issues
+- New assignment does not display under the student it was assigned to until page is refreshed
 - Sometimes the wrong deck is displayed when you select a deck to inspect
 - FIXED w/ commit 54- Bug when deleting a flashcard. The flashcard will persist until you leave the current deck and then re-enter it. No refresh required.
 - FIXED w/ Redux/Assignment Slice: New Assignment triggers a refresh in order to correctly display Assignments when a student is selected
