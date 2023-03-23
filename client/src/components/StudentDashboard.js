@@ -11,7 +11,7 @@ function StudentDashboard() {
     const myTeacher = teachers.find((teacher) => teacher.id === currentStudent.teacher_id)
 
     const assignment = assignments.map((assignment)=> (
-        <Link to = {`/assignments/${assignment.id}`} key = {assignment.id}>
+        <Link to = {`/assignments/study/${assignment.id}`} key = {assignment.id}>
             <MyAssignment
                 assignment = {assignment}
             />
