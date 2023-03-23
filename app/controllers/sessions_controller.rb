@@ -38,35 +38,16 @@ class SessionsController < ApplicationController
         end
     end
       
-    # def create_student_session
-    #     student = Student.find_by(email: params[:user][:email])
-    #     if student
-    #         if student.valid_password?(params[:user][:password])
-    #             sign_in(student)
-    #             respond_with student, status: :ok
-    #         else
-    #             puts "Invalid password"
-    #             render json: { error: 'Invalid email or password' }, status: :unauthorized
-    #         end
-    #     else
-    #         puts "Invalid email"
-    #         render json: { error: 'Invalid email or password' }, status: :unauthorized
-    #     end
-    # end    
     def create_student_session
         student = Student.find_by(email: params[:user][:email])
-        puts "found student: #{student}"
         if student
             if student.valid_password?(params[:user][:password])
                 sign_in(student)
-                puts "Student object before rendering: #{student}" # Add this line
                 render json: student, status: :ok
             else
-                puts "Invalid password"
                 render json: { error: 'Invalid email or password' }, status: :unauthorized
             end
         else
-            puts "Invalid email"
             render json: { error: 'Invalid email or password' }, status: :unauthorized
         end
     end
