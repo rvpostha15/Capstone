@@ -8,7 +8,7 @@ Teacher.create!(
   username: "rkatz",
   email: "rachel@katz.com",
   password: "password",
-  password_confirmation: "password"
+  password_confirmation: "password",
 )
 
 Teacher.create!(
@@ -18,19 +18,19 @@ Teacher.create!(
   username: "glee",
   email: "greem@lee.com",
   password: "password",
-  password_confirmation: "password"
+  password_confirmation: "password",
 )
 
-  
+puts "teachers done"
 # Students
 Student.create!(
   lehrer: false,
-  first_name: Faker::Name.first_name,
-  last_name: Faker::Name.last_name,
-  username: Faker::Internet.username,
-  email: Faker::Internet.email,
+  first_name: "Ron",
+  last_name: "Posthauer",
+  username: "rpost",
+  email: "ron@post.com",
   password: "password",
-  teacher_id: Teacher.first.id
+  teacher_id: Teacher.first.id,
 )
 
 Student.create!(
@@ -40,7 +40,7 @@ Student.create!(
   username: Faker::Internet.username,
   email: Faker::Internet.email,
   password: "password",
-  teacher_id: Teacher.last.id
+  teacher_id: Teacher.last.id,
 )
 
 12.times do
@@ -51,29 +51,31 @@ Student.create!(
     username: Faker::Internet.username,
     email: Faker::Internet.email,
     password: "password",
-    teacher_id: Teacher.all.sample.id
+    teacher_id: Teacher.all.sample.id,
   )
 end
+
+puts "students done"
 
 # Decks
 Deck.create!(
   title: "Spanish",
-  teacher_id: Teacher.all.sample.id
+  teacher_id: Teacher.all.sample.id,
 )
 
 Deck.create!(
   title: "German",
-  teacher_id: Teacher.all.sample.id
+  teacher_id: Teacher.all.sample.id,
 )
 
 Deck.create!(
   title: "Ruby on Rails",
-  teacher_id: Teacher.all.sample.id
+  teacher_id: Teacher.all.sample.id,
 )
 
 Deck.create!(
   title: "React",
-  teacher_id: Teacher.all.sample.id
+  teacher_id: Teacher.all.sample.id,
 )
 
 # Flashcards for Spanish Deck

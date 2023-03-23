@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setDecks } from './store/slices/deckSlice';
 import { setCurrentTeacher } from './store/slices/teacherSlice';
 import { setStudents } from "./store/slices/studentSlice";
+import { setCurrentStudent } from "./store/slices/studentSlice";
 
 // Components & CSS
 import "./css/MintyTheme.css";
@@ -18,12 +19,14 @@ import EditFlashcard from "./components/EditFlashcard";
 import NewAssignment from "./components/NewAssignment";
 import Home from "./components/Home";
 import Login from "./components/Login"; // Import the Login component
+import { setAssignments } from "./store/slices/assignmentSlice";
 
 function App() {
   const dispatch = useDispatch();
   const currentTeacher = useSelector((state) => state.teacher.currentTeacher);
   const decks = useSelector((state) => state.deck.decks);
   const students = useSelector((state) => state.student.students)
+  const currentStudent = useSelector((state) => state.student.currentStudent)
 
   // Add this state
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -37,6 +40,15 @@ function App() {
         dispatch(setStudents(data.students))
       });
   };
+
+  const fetchLoggedInStudent = (studentId) => {
+    fetch(`/students/${studentId}`)
+      .then((r) => r.json())
+      .then((data)=> {
+        dispatch(setCurrentStudent(data))
+        dispatch(setAssignments(data.assignments))
+      })
+  }
 
   const fetchCurrentTeacher = () => {
     fetch('/current_teacher')
@@ -56,6 +68,10 @@ function App() {
       console.error('Error fetching current teacher:', error);
     });
   }
+
+  // const fetchCurrentUser = () => {
+
+  // }
   
   useEffect(()=> {
     fetchCurrentTeacher();
@@ -98,6 +114,7 @@ function App() {
           <Route path="/">
             <Home
               currentTeacher={currentTeacher}
+              currentStudent={currentStudent}
               setIsAuthenticated={setIsAuthenticated}
             />
           </Route>
@@ -105,10 +122,16 @@ function App() {
       </div>
     </BrowserRouter>
   ) : (
-    <Login onLoginSuccess={(teacherId) => {
-      setIsAuthenticated(true)
-      fetchLoggedInTeacher(teacherId)
-    }}/>
+    <Login 
+      onTeacherLoginSuccess={(teacherId) => {
+        setIsAuthenticated(true)
+        fetchLoggedInTeacher(teacherId)
+      }}
+      onStudentLoginSuccess={(studentId) => {
+        setIsAuthenticated(true)
+        fetchLoggedInStudent(studentId)
+      }}
+      />
   );
 }
 

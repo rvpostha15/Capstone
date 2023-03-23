@@ -26,7 +26,6 @@ class TeachersController < ApplicationController
         end
     end
       
-
     private 
 
     def find_teacher

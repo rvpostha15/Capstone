@@ -1,5 +1,5 @@
 class StudentSerializer < ActiveModel::Serializer
-  attributes :id, :lehrer, :first_name, :last_name, :username, :email, :password_digest, :teacher_id, :full_name
+  attributes :id, :lehrer, :first_name, :last_name, :username, :email, :password, :password_confirmation, :teacher_id, :full_name
 
   has_many :assignments
 

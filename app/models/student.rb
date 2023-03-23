@@ -1,4 +1,8 @@
 class Student < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :trackable
+
     # Associations
     belongs_to :teacher
   
@@ -7,11 +11,11 @@ class Student < ApplicationRecord
   
     # Validations
     VALID_EMAIL_REGEX = /^(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6})$/i
-    validates :email, :first_name, :last_name, :username, presence: true
-    validates :email, :username, uniqueness: true
+    validates :first_name, :last_name, :username, presence: true
+    validates :username, uniqueness: true
     validates :email, format:{with:VALID_EMAIL_REGEX, multiline:true}
   
     # Authentication
-    has_secure_password
+    # has_secure_password
   end
   

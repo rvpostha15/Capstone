@@ -1,28 +1,75 @@
+
 class SessionsController < ApplicationController
-    
-    def current_logged_in_teacher
-        if teacher_signed_in?
-          render json: current_teacher, status: :ok
-        else
-          render json: { error: 'Not logged in' }, status: :unauthorized
-        end
+    include ActionController::RespondWith
+    respond_to :json
+
+    def new
     end
-    
+  
     def create
-        teacher = Teacher.find_by(email: params[:user][:email])
-    
-        if teacher&.valid_password?(params[:user][:password])
-            sign_in(:teacher, teacher)
-            render json: teacher, status: :ok
-        else
-            puts "Authentication failed for email: #{params[:user][:email]}" # Log the email
-            render json: { error: 'Invalid email or password' }, status: :unauthorized
+        lehrer = params[:user][:lehrer].to_i
+        puts "params[:session][:lehrer]: #{params[:user][:lehrer]}"
+        if lehrer == 1
+            create_teacher_session
+            puts 'teacher teacher'
+        elsif lehrer == 0
+            create_student_session
+            puts "this is running"
         end
     end
   
     def destroy
-        sign_out(current_teacher)
-        head :no_content
+      sign_out(current_student || current_teacher)
+      head :no_content
     end
-  end
+  
+    private
+  
+    def create_teacher_session
+        if params[:user][:lehrer] == 1
+            teacher = Teacher.find_by(email: params[:user][:email])
+            puts "found teacher: #{teacher}"
+            if teacher && teacher.valid_password?(params[:user][:password])
+                sign_in(teacher)
+                render json: teacher, status: :ok
+            else
+                render json: { error: 'Invalid email or password' }, status: :unauthorized
+            end
+        end
+    end
+      
+    # def create_student_session
+    #     student = Student.find_by(email: params[:user][:email])
+    #     if student
+    #         if student.valid_password?(params[:user][:password])
+    #             sign_in(student)
+    #             respond_with student, status: :ok
+    #         else
+    #             puts "Invalid password"
+    #             render json: { error: 'Invalid email or password' }, status: :unauthorized
+    #         end
+    #     else
+    #         puts "Invalid email"
+    #         render json: { error: 'Invalid email or password' }, status: :unauthorized
+    #     end
+    # end    
+    def create_student_session
+        student = Student.find_by(email: params[:user][:email])
+        puts "found student: #{student}"
+        if student
+            if student.valid_password?(params[:user][:password])
+                sign_in(student)
+                puts "Student object before rendering: #{student}" # Add this line
+                render json: student, status: :ok
+            else
+                puts "Invalid password"
+                render json: { error: 'Invalid email or password' }, status: :unauthorized
+            end
+        else
+            puts "Invalid email"
+            render json: { error: 'Invalid email or password' }, status: :unauthorized
+        end
+    end
+end
+      
   

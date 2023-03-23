@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :teachers, controllers: { registrations: 'teachers' }
+  devise_for :teachers, path: 'teachers', controllers: { registrations: 'lehrer/teachers' }
+  devise_for :students, path: 'students', controllers: { registrations: 'students' }  
   resources :flashcards, only: [:index, :show, :create, :update, :destroy]
   resources :assignments, only: [:index, :show, :create, :destroy]
   resources :decks, only: [:index, :show, :create, :destroy]
@@ -11,10 +12,11 @@ Rails.application.routes.draw do
   # root "articles#index"
   # get '/hello', to: 'application#hello_world'
 
-
+  # root to: 'sessions#destroy', via: :delete
 
   get '/auth', to: 'users#find_current_user'
   get '/current_teacher', to: 'sessions#current_logged_in_teacher'
+  get '/current_student', to: 'sessions#current_logged_in_student'
 
   post '/decks/:deck_id/flashcards', to: 'flashcards#create'
   delete '/decks/:deck_id/flashcards/:flashcard_id', to: 'flashcards#destroy'
