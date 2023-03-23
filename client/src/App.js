@@ -7,9 +7,11 @@ import { setDecks } from './store/slices/deckSlice';
 import { setCurrentTeacher } from './store/slices/teacherSlice';
 import { setStudents } from "./store/slices/studentSlice";
 import { setCurrentStudent } from "./store/slices/studentSlice";
+import { setAssignments } from "./store/slices/assignmentSlice";
+import { setTeachers } from "./store/slices/teacherSlice";
 
-// Components & CSS
-import "./css/MintyTheme.css";
+
+// Teacher Components 
 import Students from "./components/Students.js";
 import Header from "./components/Header.js";
 import Decks from "./components/Decks";
@@ -18,8 +20,11 @@ import ViewStudent from "./components/ViewStudent";
 import EditFlashcard from "./components/EditFlashcard";
 import NewAssignment from "./components/NewAssignment";
 import Home from "./components/Home";
-import Login from "./components/Login"; // Import the Login component
-import { setAssignments } from "./store/slices/assignmentSlice";
+import Login from "./components/Login";
+
+// Student Components 
+import StudentDashboard from "./components/StudentDashboard";
+import "./css/MintyTheme.css";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,9 +32,11 @@ function App() {
   const decks = useSelector((state) => state.deck.decks);
   const students = useSelector((state) => state.student.students)
   const currentStudent = useSelector((state) => state.student.currentStudent)
+  const assignments = useSelector((state) => state.assignment.assignments)
 
   // Add this state
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userType, setUserType] = useState('')
 
   // Fetch Teacher 3 => NEED TO UPDATE TO FETCH LOGGED IN TEACHER!!
   const fetchLoggedInTeacher = (teacherId) => {
@@ -38,8 +45,15 @@ function App() {
       .then((data) => {
         dispatch(setCurrentTeacher(data))
         dispatch(setStudents(data.students))
+        setUserType('teacher')
       });
   };
+
+  fetch('/teachers')
+    .then((r) => r.json())
+    .then((data) => {
+      dispatch(setTeachers(data))
+    })
 
   const fetchLoggedInStudent = (studentId) => {
     fetch(`/students/${studentId}`)
@@ -47,6 +61,7 @@ function App() {
       .then((data)=> {
         dispatch(setCurrentStudent(data))
         dispatch(setAssignments(data.assignments))
+        setUserType('student')
       })
   }
 
@@ -86,40 +101,55 @@ function App() {
   // Conditionally render the Login component or the rest of your application
   return isAuthenticated ? (
     <BrowserRouter>
-      <Header />
-      <div className="content">
-        <Switch>
-          <Route path="/students/:id">
-            <ViewStudent />
-          </Route>
-          <Route path="/students">
-            <Students students={students} />
-          </Route>
-          <Route path="/decks/:id/flashcards/:id/edit">
-            <EditFlashcard />
-          </Route>
-          <Route path="/decks/:id">
-            <ViewDeck />
-          </Route>
-          <Route path="/decks">
-            <Decks decks={decks} />
-          </Route>
-          <Route path="/new-assignment">
-            <NewAssignment 
-              students={students}
-              decks={decks}
-              fetchCurrentTeacher={fetchCurrentTeacher}
-            />
-          </Route>
-          <Route path="/">
-            <Home
-              currentTeacher={currentTeacher}
-              currentStudent={currentStudent}
-              setIsAuthenticated={setIsAuthenticated}
-            />
-          </Route>
-        </Switch>
-      </div>
+      <>
+        {userType === 'teacher' ? (
+          <>
+            <Header />
+            <div className="content">
+              <Switch>
+                <Route path="/students/:id">
+                  <ViewStudent />
+                </Route>
+                <Route path="/students">
+                  <Students students={students} />
+                </Route>
+                <Route path="/decks/:id/flashcards/:id/edit">
+                  <EditFlashcard />
+                </Route>
+                <Route path="/decks/:id">
+                  <ViewDeck />
+                </Route>
+                <Route path="/decks">
+                  <Decks decks={decks} />
+                </Route>
+                <Route path="/new-assignment">
+                  <NewAssignment 
+                    students={students}
+                    decks={decks}
+                    fetchCurrentTeacher={fetchCurrentTeacher}
+                  />
+                </Route>
+                <Route path="/">
+                  <Home
+                    currentTeacher={currentTeacher}
+                    currentStudent={currentStudent}
+                    setIsAuthenticated={setIsAuthenticated}
+                  />
+                </Route>
+              </Switch>
+            </div>
+          </>
+        ) : (
+          <Switch>
+            {/* <Route path="/student-dashboard"> */}
+              <StudentDashboard 
+                currentStudent={currentStudent}
+                assignments={assignments}
+              />
+            {/* </Route> */}
+          </Switch>
+        )}
+      </>
     </BrowserRouter>
   ) : (
     <Login 
@@ -131,8 +161,9 @@ function App() {
         setIsAuthenticated(true)
         fetchLoggedInStudent(studentId)
       }}
-      />
+    />
   );
-}
+  
+}  
 
 export default App;

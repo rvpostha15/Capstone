@@ -80,12 +80,22 @@ body {
     padding: 10px;
 }
 
+.assignment-grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    padding: 10px;
+    margin-left: 25%;
+    margin-right: 15%;
+}
+
 .assignment {
     background-color: #ff9696;
     padding: 20px;
     margin: 5px;
-    min-height: 150px;
-    min-width: 200px;
+    height: 200px;
+    width: 250px;
+    /* max-width: 300px; */
 }
 
 .deck {

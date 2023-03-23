@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Checkbox } from 'semantic-ui-react';
+
 
 const Login = ({onTeacherLoginSuccess, onStudentLoginSuccess}) => {
   const [email, setEmail] = useState('');
@@ -26,48 +26,18 @@ const Login = ({onTeacherLoginSuccess, onStudentLoginSuccess}) => {
       setFormData({ ...formData, [e.target.name]: e.target.value });
   }
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const response = await fetch('/login', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify({ user: { email, password } }),
-  //     });
-  
-  //     if (response.ok) {
-  //       // Handle successful login, store tokens, and redirect user
-  //       const data = await response.json();
-  //       if (data.lehrer) {
-  //         onTeacherLoginSuccess(data.id);
-  //       } else {
-  //         onStudentLoginSuccess(data.id);
-  //       }
-  //     } else {
-  //       setError('Invalid email or password');
-  //     }
-  //   } catch (err) {
-  //     setError('Invalid email or password');
-  //   }
-  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Submitting login credentials:", isTeacher, email, password);
     try {
-      console.log("sending login request..");
       const response = await fetch('/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ user: { email, password, lehrer: isTeacher?1:0 } }),
+        body: JSON.stringify({ user: { email, password, lehrer: isTeacher? 1 : 0 } }),
       });
-      console.log('response', response);
-      console.log('response headers', response.headers);
       const responseBody = await response.json().catch(() => null);
-      console.log('response body', responseBody);
       if (response.ok && responseBody) {
         // Handle successful login, store tokens, and redirect user
         if (responseBody.lehrer) {
@@ -78,17 +48,10 @@ const Login = ({onTeacherLoginSuccess, onStudentLoginSuccess}) => {
       } else {
         setError('Invalid email or password');
       }
-    } catch (err) {
-      console.log("Error occurred while processing login request:", err);
+    } catch (error) {
       setError('Invalid email or password');
     }
   };
-  
-  
-  
-
-  
-  
 
   const toggleSignupForm = () => {
     setSignUpForm(true)
@@ -122,7 +85,6 @@ const Login = ({onTeacherLoginSuccess, onStudentLoginSuccess}) => {
       console.log(data)
     })
     .catch((error) => {
-      console.log(error);
       const formattedErrors = [];
       for (const key in error.errors) {
         error.errors[key].forEach((errorMessage) => {
