@@ -4,13 +4,12 @@ import { useDispatch } from 'react-redux';
 import { setCurrentDeck } from '../store/slices/deckSlice';
 import { setFlashcards } from '../store/slices/flashcardSlice';
 
-function Deck({ deck, onDeckSelect }) {
+function Deck({ deck }) {
   const dispatch = useDispatch();
 
   const handleClick = (e) => {
     dispatch(setCurrentDeck(deck));
     dispatch(setFlashcards(deck.flashcards));
-    // onDeckSelect(deck)
   };
 
   return (
