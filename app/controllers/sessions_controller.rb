@@ -2,9 +2,6 @@
 class SessionsController < ApplicationController
     include ActionController::RespondWith
     respond_to :json
-
-    def new
-    end
   
     def create
         lehrer = params[:user][:lehrer].to_i
@@ -21,6 +18,26 @@ class SessionsController < ApplicationController
     def destroy
       sign_out(current_student || current_teacher)
       head :no_content
+    end
+
+    def current_logged_in_teacher
+        puts 'current logged in teacher funciton'
+        if teacher_signed_in?
+            puts "signed in"
+          render json: current_teacher, status: :ok
+        else
+          render json: { error: 'Not logged in' }, status: :unauthorized
+        end
+    end
+
+    def current_logged_in_student
+        puts 'current logged in teacher funciton'
+        if student_signed_in?
+            puts "signed in"
+          render json: current_student, status: :ok
+        else
+          render json: { error: 'Not logged in' }, status: :unauthorized
+        end
     end
   
     private
@@ -40,13 +57,9 @@ class SessionsController < ApplicationController
       
     def create_student_session
         student = Student.find_by(email: params[:user][:email])
-        if student
-            if student.valid_password?(params[:user][:password])
+        if student && student.valid_password?(params[:user][:password])           
                 sign_in(student)
-                render json: student, status: :ok
-            else
-                render json: { error: 'Invalid email or password' }, status: :unauthorized
-            end
+                render json: student, status: :ok       
         else
             render json: { error: 'Invalid email or password' }, status: :unauthorized
         end

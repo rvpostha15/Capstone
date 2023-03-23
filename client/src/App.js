@@ -27,7 +27,7 @@ import StudentDashboard from "./components/StudentDashboard";
 import Study from "./components/Study"
 import "./css/MintyTheme.css";
 
-function App(props) {
+function App(history) {
   const dispatch = useDispatch();
   const currentTeacher = useSelector((state) => state.teacher.currentTeacher);
   const decks = useSelector((state) => state.deck.decks);
@@ -85,6 +85,25 @@ function App(props) {
     });
   }
 
+  const fetchCurrentStudent = () => {
+    fetch('/current_student')
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Not logged in');
+      }
+    })
+    .then((data) => {
+      dispatch(setCurrentStudent(data));
+      dispatch(setAssignments(data.assignments));
+      setIsAuthenticated(true);
+    })
+    .catch((error) => {
+      console.error('Error fetching current student:', error);
+    });
+  }
+
   // const fetchCurrentUser = () => {
 
   // }
@@ -92,6 +111,10 @@ function App(props) {
   useEffect(()=> {
     fetchCurrentTeacher();
   }, []);
+
+  // useEffect(()=> {
+  //   fetchCurrentStudent();
+  // }, []);
 
   useEffect(() => {
     fetch('/decks')
@@ -149,7 +172,9 @@ function App(props) {
               />
             </Route>
             <Route path="/assignments/study/:id">
-              <Study />
+              <Study 
+                fetchCurrentStudent={fetchCurrentStudent}
+              />
             </Route>
           </Switch>
         )}
@@ -164,7 +189,7 @@ function App(props) {
       onStudentLoginSuccess={(studentId) => {
         setIsAuthenticated(true)
         fetchLoggedInStudent(studentId)
-        props.history.push('/student-dashboard')
+        history.push('/student-dashboard')
       }}
     />
   );

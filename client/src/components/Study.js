@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useSelector } from "react-redux"
+import { withRouter } from "react-router-dom";
 import StudyFlashcard from "./StudyFlashcard";
 
-function Study() {
+function Study({fetchCurrentStudent, history}) {
     const currentDeck = useSelector((state) => state.deck.currentDeck)
     const flashcards = useSelector((state) => state.flashcard.flashcards)
     const currentAssignment = useSelector((state) => state.assignment.currentAssignment);
+
 
     const initialFormData = {
         complete: currentAssignment.complete,
@@ -46,6 +48,8 @@ function Study() {
         })
         .then(r => {
             console.log(r)
+            fetchCurrentStudent();
+            history.push('/student-dashboard')
         })
         .catch(error => {
             console.log(error)
@@ -68,4 +72,4 @@ function Study() {
     )
 }
 
-export default Study
+export default withRouter(Study)

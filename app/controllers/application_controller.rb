@@ -26,13 +26,13 @@ class ApplicationController < ActionController::API
     #   session[:student_id] = student.id
     # end
     
-    def current_teacher
-      @current_teacher ||= Teacher.find_by(id: session[:teacher_id])
-    end
+    # def current_teacher
+    #   @current_teacher ||= Teacher.find_by(id: session[:teacher_id])
+    # end
     
-    def current_student
-      @current_student ||= Student.find_by(id: session[:student_id])
-    end
+    # def current_student
+    #   @current_student ||= Student.find_by(id: session[:student_id])
+    # end
     
     # def teacher_logged_in?
     #   current_teacher.present?

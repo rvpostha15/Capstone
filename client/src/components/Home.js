@@ -19,7 +19,7 @@ function Home({currentTeacher, setIsAuthenticated, currentStudent}) {
 
     return(
         <>
-            <h1>You are logged in as {currentTeacher.first_name} {currentStudent.first_name} {currentTeacher.last_name}</h1>
+            <h1>You are logged in as {currentTeacher.first_name} {currentTeacher.last_name}</h1>
             <button onClick={handleLogout} className="minty-button">Logout</button>
         </>
     )
