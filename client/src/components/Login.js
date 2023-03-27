@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 
 
-const Login = ({onTeacherLoginSuccess, onStudentLoginSuccess}) => {
+const Login = ({onTeacherLoginSuccess, onStudentLoginSuccess, history}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isTeacher, setIsTeacher] = useState(false)
@@ -45,7 +45,9 @@ const Login = ({onTeacherLoginSuccess, onStudentLoginSuccess}) => {
         if (responseBody.lehrer) {
           onTeacherLoginSuccess(responseBody.id);
         } else {
-          onStudentLoginSuccess(responseBody.id);
+          onStudentLoginSuccess(responseBody.id)
+          //This One Seems to Be The Only One That Redirects To Student-Dashboard (w/ bug)
+          history.push('/student-dashboard');
         }
       } else {
         setError('Invalid email or password');

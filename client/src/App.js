@@ -63,6 +63,7 @@ function App(history) {
         dispatch(setCurrentStudent(data))
         dispatch(setAssignments(data.assignments))
         setUserType('student')
+        // history.push('/student-dashboard')
       })
   }
 
@@ -190,7 +191,7 @@ function App(history) {
       onStudentLoginSuccess={(studentId) => {
         setIsAuthenticated(true)
         fetchLoggedInStudent(studentId)
-        history.push('/student-dashboard')
+        // history.push('/student-dashboard')
       }}
     />
   );
