@@ -169,6 +169,7 @@ function App(history) {
               <StudentDashboard 
                 currentStudent={currentStudent}
                 assignments={assignments}
+                setIsAuthenticated={setIsAuthenticated}
               />
             </Route>
             <Route path="/assignments/study/:id">
