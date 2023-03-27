@@ -28,7 +28,8 @@
   }
   
   .flashcard .front,
-  .flashcard .back {
+  .flashcard .back,
+  .flashcard .study {
     padding: 20px;
     width: 300px;
     text-align: center;
@@ -42,5 +43,8 @@
   
   .flashcard .back {
     background-color: #e0f2f1;
+  }
+  .flashcard .study {
+    background-color: #cadddd;
   }
   
