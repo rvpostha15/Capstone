@@ -25,6 +25,8 @@ import Login from "./components/Login";
 // Student Components 
 import StudentDashboard from "./components/StudentDashboard";
 import Study from "./components/Study"
+import StudentHeader from "./components/StudentHeader";
+import MyAssignments from "./components/MyAssignments.js";
 import "./css/MintyTheme.css";
 
 function App(history) {
@@ -165,20 +167,28 @@ function App(history) {
             </div>
           </>
         ) : (
-          <Switch>
-            <Route path="/student-dashboard">
-              <StudentDashboard 
-                currentStudent={currentStudent}
-                assignments={assignments}
-                setIsAuthenticated={setIsAuthenticated}
-              />
-            </Route>
-            <Route path="/assignments/study/:id">
-              <Study 
-                fetchCurrentStudent={fetchCurrentStudent}
-              />
-            </Route>
-          </Switch>
+          <>
+          <StudentHeader/>
+          <div className="content">
+            <Switch>
+              <Route path="/student-dashboard">
+                <StudentDashboard 
+                  currentStudent={currentStudent}
+                  assignments={assignments}
+                  setIsAuthenticated={setIsAuthenticated}
+                />
+              </Route>
+              <Route path="/assignments/study/:id">
+                <Study 
+                  fetchCurrentStudent={fetchCurrentStudent}
+                />
+              </Route>
+              <Route path="/my-assignments">
+                <MyAssignments/>
+              </Route>
+            </Switch>
+          </div>
+          </>
         )}
       </>
     </BrowserRouter>

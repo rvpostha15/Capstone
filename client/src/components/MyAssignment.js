@@ -23,7 +23,7 @@ function MyAssignment({assignment}) {
                     <h2>Complete</h2>
                 </div>
             ) : (
-                <div className="assignment">
+                <div className="assignment incomplete">
                     <h1>{deck.title}</h1>
                     <h2>Incomplete</h2>
                 </div>

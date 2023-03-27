@@ -1,26 +1,27 @@
-import MyAssignment from "./MyAssignment";
-import { Link } from "react-router-dom";
+// import MyAssignment from "./MyAssignment";
+import { Link, withRouter } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux"
 import { setCurrentAssignment } from "../store/slices/assignmentSlice";
 
-function StudentDashboard({setIsAuthenticated}) {
+function StudentDashboard({setIsAuthenticated, history}) {
     const dispatch = useDispatch();
     const teachers = useSelector((state) => state.teacher.teachers)
     const currentStudent = useSelector((state) => state.student.currentStudent);
     const assignments = useSelector((state) => state.assignment.assignments);
     const myTeacher = teachers.find((teacher) => teacher.id === currentStudent.teacher_id)
 
-    const assignment = assignments.map((assignment)=> (
-        <Link 
-            to = {`/assignments/study/${assignment.id}`} 
-            key = {assignment.id}
-            onClick = {() => handleAssignmentClick(assignment)}
-        >
-            <MyAssignment
-                assignment = {assignment}
-            />
-        </Link>
-    ))
+    // const assignment = assignments.map((assignment)=> (
+    //     <Link
+    //         className="testing" 
+    //         to = {`/assignments/study/${assignment.id}`} 
+    //         key = {assignment.id}
+    //         onClick = {() => handleAssignmentClick(assignment)}
+    //     >
+    //         <MyAssignment
+    //             assignment = {assignment}
+    //         />
+    //     </Link>
+    // ))
 
     const handleAssignmentClick = (assignment) => {
         dispatch(setCurrentAssignment(assignment))
@@ -33,7 +34,9 @@ function StudentDashboard({setIsAuthenticated}) {
             });
     
             if (response.ok) {
-                setIsAuthenticated(false);
+                window.location.reload();
+                // history.push('/login')
+                // setIsAuthenticated(false);
             } else {
                 console.error('Failed to log out');
             }
@@ -45,13 +48,14 @@ function StudentDashboard({setIsAuthenticated}) {
     // console.log("testing", currentAssignment)
     return(
         <>
-            <h1>Logged in as {currentStudent.full_name}</h1>
+            <h1>You are logged in as {currentStudent.full_name}</h1>
             <button onClick={handleLogout} className="minty-button">Logout</button>
-            <div className="assignment-grid-container">
+            {/* <h1 className="title off-center">My Assignments</h1>
+            <div className="assignment-grid-container off-center">
                 {assignment}
-            </div>
+            </div> */}
         </>
     )
 }
 
-export default StudentDashboard
+export default withRouter(StudentDashboard);

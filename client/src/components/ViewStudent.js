@@ -23,7 +23,7 @@ function ViewStudent() {
       {assignments && assignments.length === 0 ? (
         <div className='errors'>No assignments</div>
       ) : (
-        <div className='grid-container'>
+        <div className='assignment-grid-container'>
           {assignmentList}
         </div>
       )}

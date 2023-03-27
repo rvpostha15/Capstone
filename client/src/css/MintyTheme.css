@@ -80,28 +80,53 @@ body {
     padding: 10px;
 }
 
+.grid-container :hover {
+    background-color: #91ebe3;
+}
+
 .assignment-grid-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
     padding: 10px;
-    margin-left: 25%;
+    /* margin-left: 25%; */
     margin-right: 15%;
 }
 
+
 .assignment {
-    background-color: #ff9696;
+    /* background-color: #ff9696; */
     padding: 20px;
     margin: 5px;
     height: 200px;
     width: 250px;
     /* max-width: 300px; */
 }
+.assignment.incomplete {
+    background-color: #ff9696;
+}
+
+.assignment.complete {
+    background-color: #8ce8b7;
+}
+
+.custom-nav-link {
+    text-decoration: inherit;
+    color: inherit;
+    background-color: inherit;
+}
+.custom-nav-link :hover{
+    /* text-decoration: none; */
+    color: #007f7f;
+    background-color: #91ebe3;
+    width: 250px;
+}
 
 .deck {
     background: #bbdad8;
     text-align: center;
 }
+
 
 .student {
     background: #bbdad8;
@@ -122,9 +147,7 @@ body {
     margin-left: 15px;
 }
 
-.assignment.complete {
-    background-color: #8ce8b7;
-}
+
 
 .content {
     margin-left: 200px;
@@ -150,9 +173,9 @@ body {
     text-decoration: none;
 }
 
-.content a:hover {
+/* .content a:hover {
     background-color: #91ebe3;
-}
+} */
 
 .errors {
     color: #db7272;

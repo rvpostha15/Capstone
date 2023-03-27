@@ -49,7 +49,7 @@ function Study({fetchCurrentStudent, history}) {
         .then(r => {
             console.log(r)
             fetchCurrentStudent();
-            history.push('/student-dashboard')
+            history.push('/my-assignments')
         })
         .catch(error => {
             console.log(error)

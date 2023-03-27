@@ -44,6 +44,7 @@ const Login = ({onTeacherLoginSuccess, onStudentLoginSuccess, history}) => {
         // Handle successful login, store tokens, and redirect user
         if (responseBody.lehrer) {
           onTeacherLoginSuccess(responseBody.id);
+          history.push('/');
         } else {
           onStudentLoginSuccess(responseBody.id)
           //This One Seems to Be The Only One That Redirects To Student-Dashboard (w/ bug)
