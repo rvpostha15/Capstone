@@ -57,8 +57,8 @@ function Study({fetchCurrentStudent, history}) {
     }
 
     return (
-        <div>
-        <h1>Study Time!{currentDeck.title}</h1>
+        <div className="off-center">
+        <h1 className="title">{currentDeck.title}</h1>
             <StudyFlashcard key={flashcard.id} flashcard={flashcard} />
             {cardIndex < flashcards.length - 1 ? (
                 <button className="minty-button" onClick={handleNext}>Next</button>

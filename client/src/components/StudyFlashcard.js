@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
+// import "./css/ViewDeck.css";
 
 function StudyFlashcard({flashcard}) {
     const currentDeck = useSelector((state) => state.deck.currentDeck);
@@ -14,13 +15,13 @@ function StudyFlashcard({flashcard}) {
     return(
         <div className='flashcard'>
             {isFront ? (
-                <div>
-                    <h2 className='front'>{front}</h2>
+                <div className='front'>
+                    <h2>{front}</h2>
                     <button onClick={toggleFlip} className='minty-button'>Answer</button>
                 </div>
             ) : (
-                <div>
-                    <h2 className='back'>{back}</h2>
+                <div className='study'>
+                    <h2 >{back}</h2>
                     <button onClick={toggleFlip} className='minty-button'>Front</button>
                 </div>
             )}
