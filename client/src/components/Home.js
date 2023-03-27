@@ -1,14 +1,15 @@
-
+import { withRouter } from "react-router-dom";
 function Home({currentTeacher, setIsAuthenticated, currentStudent}) {
 
-    const handleLogout = async () => {
+    const handleLogout = async ({history}) => {
         try {
             const response = await fetch('/logout', {
                 method: 'DELETE',
             });
     
             if (response.ok) {
-                window.location.reload()
+                // history.push('/login');
+                window.location.reload();
                 // setIsAuthenticated(false);
             } else {
                 console.error('Failed to log out');
@@ -26,4 +27,4 @@ function Home({currentTeacher, setIsAuthenticated, currentStudent}) {
     )
 }
 
-export default Home;
+export default withRouter(Home);

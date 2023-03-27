@@ -11,7 +11,7 @@ function Assignment({ assignment }) {
     const deckTitle = deck ? deck.title : null
 
     return (
-            <div className={`assignment ${complete ? "complete" : ""}`}>
+            <div className={`assignment ${complete ? "complete" : "incomplete"}`}>
             <h1 className="minty-text">{deckTitle}</h1>
             {complete ? (
                 <div>

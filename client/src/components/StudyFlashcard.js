@@ -16,12 +16,12 @@ function StudyFlashcard({flashcard}) {
             {isFront ? (
                 <div>
                     <h2 className='front'>{front}</h2>
-                    <button onClick={toggleFlip} className='minty-button'>See Back</button>
+                    <button onClick={toggleFlip} className='minty-button'>Answer</button>
                 </div>
             ) : (
                 <div>
                     <h2 className='back'>{back}</h2>
-                    <button onClick={toggleFlip} className='minty-button'>See Front</button>
+                    <button onClick={toggleFlip} className='minty-button'>Front</button>
                 </div>
             )}
         </div>
