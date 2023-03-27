@@ -33,7 +33,8 @@ function StudentDashboard({setIsAuthenticated}) {
             });
     
             if (response.ok) {
-                setIsAuthenticated(false);
+                window.location.reload()
+                // setIsAuthenticated(false);
             } else {
                 console.error('Failed to log out');
             }
