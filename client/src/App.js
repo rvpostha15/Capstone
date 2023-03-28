@@ -36,6 +36,7 @@ function App(history) {
   const students = useSelector((state) => state.student.students)
   const currentStudent = useSelector((state) => state.student.currentStudent)
   const assignments = useSelector((state) => state.assignment.assignments)
+  const teachers = useSelector((state) => state.teacher.teachers)
 
   // State
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -52,11 +53,13 @@ function App(history) {
       });
   };
 
-  fetch('/teachers')
+  const fetchTeachers = () => {fetch('/teachers')
     .then((r) => r.json())
     .then((data) => {
       dispatch(setTeachers(data))
+      console.log('teachers:', teachers)
     })
+  }
 
   const fetchLoggedInStudent = (studentId) => {
     fetch(`/students/${studentId}`)
@@ -113,6 +116,7 @@ function App(history) {
   
   useEffect(()=> {
     fetchCurrentTeacher();
+    fetchTeachers();
   }, []);
 
   // useEffect(()=> {
