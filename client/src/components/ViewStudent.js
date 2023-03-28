@@ -5,10 +5,9 @@ import { useSelector } from 'react-redux';
 
 function ViewStudent() {
   const currentStudent = useSelector((state) => state.student.currentStudent);
-  console.log(currentStudent)
 
   if (!currentStudent) {
-    return <div>No student selected.</div>;
+    return <h1>No student selected.</h1>;
   }
   
   const { first_name, last_name, assignments } = currentStudent;

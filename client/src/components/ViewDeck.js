@@ -22,7 +22,6 @@ function ViewDeck(props) {
         const response = await fetch(`/decks/${currentDeck.id}`);
         const data = await response.json();
 
-        // Update the current deck and flashcards in the state
         dispatch(setCurrentDeck(data));
         dispatch(setFlashcards(data.flashcards));
       } catch (error) {

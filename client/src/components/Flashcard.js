@@ -15,7 +15,6 @@ function Flashcard({ flashcard }) {
         const deckId = flashcard.deck_id;
         const flashcardId = flashcard.id;
         dispatch(deleteFlashcard({ deckId, flashcardId }));
-        console.log('deleteFlashcard action dispatched');
     };
 
     const handleCurrentFlashcard = () => {

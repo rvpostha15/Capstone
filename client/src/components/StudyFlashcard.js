@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
-// import "./css/ViewDeck.css";
 
 function StudyFlashcard({flashcard}) {
     const currentDeck = useSelector((state) => state.deck.currentDeck);

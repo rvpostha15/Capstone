@@ -11,11 +11,6 @@ class StudentsController < ApplicationController
         render json: student, status: :ok
     end
 
-    # def create 
-    #     student = Student.create!(student_params)
-    #     render json: student, status: :created
-    # end
-
     def create
         student = Student.new(student_params)
         if student.save

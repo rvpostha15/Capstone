@@ -13,11 +13,6 @@ const Login = ({onTeacherLoginSuccess, onStudentLoginSuccess, history}) => {
   const [signUpErrors, setSignUpErrors] = useState('');
   const [chooseUser, setChooseUser] = useState(false);
   const [teacherId, setTeacherId] = useState(null);
-  // const [isLehrer, setIsLehrer] = useState(false)
-  // const history = useHistory();
-
-  
-
 
   const initialFormData = {
     lehrer: false,
@@ -30,16 +25,7 @@ const Login = ({onTeacherLoginSuccess, onStudentLoginSuccess, history}) => {
   }
 
   const [formData, setFormData] = useState(initialFormData);
-  console.log("formdata:", formData)
-
-  // const configObj =  {
-  //   method: 'POST',
-  //   mode: 'cors',
-  //   headers: {
-  //       'Content-Type': 'application/json'
-  //   },
-  //   body: JSON.stringify({teacher: formData})
-  // }
+  // console.log("formdata:", formData)
 
   const handleChange = (e) => {
       setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -57,14 +43,9 @@ const Login = ({onTeacherLoginSuccess, onStudentLoginSuccess, history}) => {
       {teacher.first_name} {teacher.last_name}
     </button>
   ))
-  
-  console.log('studentFormData:', formData)
-  console.log('teach:', teach)
-  console.log('teacherId', teacherId)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submitting login credentials:", isTeacher, email, password);
     try {
       const response = await fetch('/login', {
         method: 'POST',
@@ -75,7 +56,6 @@ const Login = ({onTeacherLoginSuccess, onStudentLoginSuccess, history}) => {
       });
       const responseBody = await response.json().catch(() => null);
       if (response.ok && responseBody) {
-        // Handle successful login, store tokens, and redirect user
         if (responseBody.lehrer) {
           onTeacherLoginSuccess(responseBody.id);
           history.push('/');
@@ -100,8 +80,6 @@ const Login = ({onTeacherLoginSuccess, onStudentLoginSuccess, history}) => {
     setFormData({ ...formData, lehrer: true });
     toggleSignUpForm(true);
   }
-
-  console.log('a;slkfa;lkfa;lfj', studentSignUpForm)
   
   const setNewStudent = () => {
     setFormData({ ...formData, lehrer: false });
@@ -146,7 +124,7 @@ const Login = ({onTeacherLoginSuccess, onStudentLoginSuccess, history}) => {
       }  
     })
     .then((data) => {
-      console.log(data)
+      // console.log(data)
     })
     .catch((error) => {
       const formattedErrors = [];
@@ -180,7 +158,7 @@ const Login = ({onTeacherLoginSuccess, onStudentLoginSuccess, history}) => {
       }  
     })
     .then((data) => {
-      console.log(data)
+      // console.log(data)
     })
     .catch((error) => {
       const formattedErrors = [];
@@ -195,7 +173,6 @@ const Login = ({onTeacherLoginSuccess, onStudentLoginSuccess, history}) => {
 
   const newTeacherForm = 
     <>
-      <h1>Teacher Sign Up</h1>
       <form className='login-container' onSubmit={studentSignUpForm === false ? handleNewTeacher : handleNewStudent}>
         <label className='login'>First Name: </label>
         <input

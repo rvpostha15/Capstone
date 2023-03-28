@@ -20,10 +20,6 @@ function NewAssignment({ decks, students, fetchCurrentTeacher }) {
         deck_id: deckId,
         complete: false
     }
-    console.log("formData:", formData)
-    console.log("teacherId:", currentTeacher.id)
-    console.log("studentId:", studentId)
-    console.log("deckId:", deckId)
     
     const toggleForm = () => {
         setShowForm(true)
@@ -39,13 +35,11 @@ function NewAssignment({ decks, students, fetchCurrentTeacher }) {
 
     const toggleDeckAssigned = (deck) => {
         setDeckAssigned(true);
-        console.log("deck:", deck);
         setDeckId(deck.id)
     };
 
     const toggleStudentAssigned = (student) => {
         setStudentAssigned(true);
-        console.log("student:", student);
         setStudentId(student.id)
     };
 

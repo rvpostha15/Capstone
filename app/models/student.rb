@@ -15,7 +15,7 @@ class Student < ApplicationRecord
     validates :username, uniqueness: true
     validates :email, format:{with:VALID_EMAIL_REGEX, multiline:true}
   
-    # Authentication
+    # Authentication taken care of w/ devise
     # has_secure_password
   end
   

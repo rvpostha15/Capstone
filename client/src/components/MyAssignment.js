@@ -8,7 +8,6 @@ function MyAssignment({assignment}) {
     const deck = decks.find((deck) => deck.id === assignment.deck_id)
 
     const complete = assignment.complete
-    // console.log("complete", complete)
 
     const handleClick = (e) => {
         dispatch(setCurrentDeck(deck));

@@ -30,6 +30,7 @@ import MyAssignments from "./components/MyAssignments.js";
 import "./css/MintyTheme.css";
 
 function App(history) {
+  // States w/ Redux
   const dispatch = useDispatch();
   const currentTeacher = useSelector((state) => state.teacher.currentTeacher);
   const decks = useSelector((state) => state.deck.decks);
@@ -42,7 +43,6 @@ function App(history) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userType, setUserType] = useState('')
 
-  // Fetch Teacher 3 => NEED TO UPDATE TO FETCH LOGGED IN TEACHER!!
   const fetchLoggedInTeacher = (teacherId) => {
     fetch(`/teachers/${teacherId}`)
       .then((r) => r.json())
@@ -57,7 +57,7 @@ function App(history) {
     .then((r) => r.json())
     .then((data) => {
       dispatch(setTeachers(data))
-      console.log('teachers:', teachers)
+      // console.log('teachers:', teachers)
     })
   }
 
@@ -109,19 +109,11 @@ function App(history) {
       console.error('Error fetching current student:', error);
     });
   }
-
-  // const fetchCurrentUser = () => {
-
-  // }
   
   useEffect(()=> {
     fetchCurrentTeacher();
     fetchTeachers();
   }, []);
-
-  // useEffect(()=> {
-  //   fetchCurrentStudent();
-  // }, []);
 
   useEffect(() => {
     fetch('/decks')
@@ -129,7 +121,7 @@ function App(history) {
       .then((data) => dispatch(setDecks(data)));
   }, [dispatch]);
 
-  // Conditionally render the Login component or the rest of your application
+  // Conditionally render the Login component OR Teacher App || Student App
   return isAuthenticated ? (
     <BrowserRouter>
       <>

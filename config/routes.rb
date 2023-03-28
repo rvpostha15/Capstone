@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   # root to: 'sessions#destroy', via: :delete
 
-  get '/auth', to: 'users#find_current_user'
+  get '/auth', to: 'users#find_current_user' # I don't think this one is used... keeping it just in case
   get '/current_teacher', to: 'sessions#current_logged_in_teacher'
   get '/current_student', to: 'sessions#current_logged_in_student'
 
@@ -23,8 +23,6 @@ Rails.application.routes.draw do
   patch '/decks/:deck_id/flashcards/:flashcard_id', to: 'flashcards#update'
 
   patch '/assignments/study/:id', to: 'assignments#update'
-
-  # post '/', to: 'teachers#create'
  
   delete '/decks/:deck_id', to: 'decks#destroy'
 
@@ -34,6 +32,5 @@ Rails.application.routes.draw do
   get '*path',
       to: 'fallback#index',
       constraints: ->(req) { !req.xhr? && req.format.html? }
-
 
 end

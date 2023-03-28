@@ -1,7 +1,6 @@
 import "../css/MintyTheme.css";
 import { useDispatch } from 'react-redux';
 import { setCurrentStudent } from '../store/slices/studentSlice';
-// import { setAssignments } from "../store/slices/assignmentSlice";
 
 function Student({ student, onStudentSelect }) {
     const dispatch = useDispatch();
@@ -16,7 +15,6 @@ function Student({ student, onStudentSelect }) {
 
     return(
         <div onClick={handleClick}>
-            {/* <h1>{full_name}</h1> not working */}
             <h1>{first_name} {last_name}</h1>
         </div>
     )
