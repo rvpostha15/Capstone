@@ -11,9 +11,19 @@ class StudentsController < ApplicationController
         render json: student, status: :ok
     end
 
-    def create 
-        student = Student.create!(student_params)
-        render json: student, status: :created
+    # def create 
+    #     student = Student.create!(student_params)
+    #     render json: student, status: :created
+    # end
+
+    def create
+        student = Student.new(student_params)
+        if student.save
+          StudentMailer.welcome_email(student).deliver_now
+          render json: student, status: :created
+        else
+          render json: { errors: student.errors }, status: :unprocessable_entity
+        end
     end
 
     private 
@@ -23,6 +33,6 @@ class StudentsController < ApplicationController
     end
 
     def student_params
-        params.permit(:lehrer, :first_name, :last_name, :username, :email, :password, :password_confirmation, :teacher_id)
+        params.require(:student).permit(:lehrer, :first_name, :last_name, :username, :email, :password, :password_confirmation, :teacher_id)
     end
 end

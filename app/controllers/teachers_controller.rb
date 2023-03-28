@@ -1,6 +1,5 @@
 class TeachersController < ApplicationController
 
-    #Teacher Index Method is For Programming Only
     def index 
         teachers = Teacher.all
         render json: teachers, status: :ok

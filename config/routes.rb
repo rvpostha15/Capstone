@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :teachers, path: 'teachers', controllers: { registrations: 'lehrer/teachers' }
+  devise_for :teachers, path: 'teachers', controllers: { registrations: 'teachers' }
   devise_for :students, path: 'students', controllers: { registrations: 'students' }  
   resources :flashcards, only: [:index, :show, :create, :update, :destroy]
   resources :assignments, only: [:index, :show, :create, :update, :destroy]
