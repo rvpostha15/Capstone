@@ -10,19 +10,6 @@ function StudentDashboard({setIsAuthenticated, history}) {
     const assignments = useSelector((state) => state.assignment.assignments);
     const myTeacher = teachers.find((teacher) => teacher.id === currentStudent.teacher_id)
 
-    // const assignment = assignments.map((assignment)=> (
-    //     <Link
-    //         className="testing" 
-    //         to = {`/assignments/study/${assignment.id}`} 
-    //         key = {assignment.id}
-    //         onClick = {() => handleAssignmentClick(assignment)}
-    //     >
-    //         <MyAssignment
-    //             assignment = {assignment}
-    //         />
-    //     </Link>
-    // ))
-
     const handleAssignmentClick = (assignment) => {
         dispatch(setCurrentAssignment(assignment))
     }
@@ -45,15 +32,11 @@ function StudentDashboard({setIsAuthenticated, history}) {
         }
     };
 
-    // console.log("testing", currentAssignment)
     return(
         <>
             <h1>You are logged in as {currentStudent.full_name}</h1>
             <button onClick={handleLogout} className="minty-button">Logout</button>
-            {/* <h1 className="title off-center">My Assignments</h1>
-            <div className="assignment-grid-container off-center">
-                {assignment}
-            </div> */}
+
         </>
     )
 }

@@ -10,11 +10,6 @@ class TeachersController < ApplicationController
         render json: teacher, include: {students: {include: :assignments}}, status: :ok
     end
 
-    # def create 
-    #     teacher = Teacher.create!(teacher_params)
-    #     TeacherMailer.welcome_email(teacher).deliver_now
-    #     render json: teacher, status: :created
-    # end
     def create
         teacher = Teacher.new(teacher_params)
         if teacher.save

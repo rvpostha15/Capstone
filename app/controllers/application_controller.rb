@@ -18,29 +18,4 @@ class ApplicationController < ActionController::API
       render json: { errors: exception.message }, status: :not_found
     end
 
-    # def log_in_teacher(teacher)
-    #   session[:teacher_id] = teacher.id
-    # end
-    
-    # def log_in_student(student)
-    #   session[:student_id] = student.id
-    # end
-    
-    # def current_teacher
-    #   @current_teacher ||= Teacher.find_by(id: session[:teacher_id])
-    # end
-    
-    # def current_student
-    #   @current_student ||= Student.find_by(id: session[:student_id])
-    # end
-    
-    # def teacher_logged_in?
-    #   current_teacher.present?
-    # end
-    
-    # def student_logged_in?
-    #   current_student.present?
-    # end
-    
-    # helper_method :current_teacher, :current_student, :teacher_logged_in?, :student_logged_in?
   end
