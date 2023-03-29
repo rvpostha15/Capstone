@@ -2,7 +2,7 @@
 
 ## Description
 
-AssignMint is a web application designed to help teachers easily create assignments and flashcard decks, assign them to their students for study, and monitor their progress all in one place. The application uses React as a frontend and Ruby on Rails as a backend.
+AssignMint is a web application designed to help teachers easily create assignments and flashcard decks, assign them to their students for study, and monitor their progress all in one place. Students can view their assignments, study flashcards, and mark assignments as complete. The application uses React as a frontend and Ruby on Rails as a backend.
 
 ## Table of Contents
 
@@ -34,7 +34,7 @@ To install AssignMint on your local machine, follow these steps:
 
 ## Usage
 
-To use AssignMint, simply navigate to the web application's URL and create an account as a teacher. From there, you can create assignments and flashcard decks, assign them to your students, and monitor their progress. The application also features authentication and authorization, as well as custom CSS to make the user interface more visually appealing.
+To use AssignMint, simply navigate to the web application's URL and create an account as a teacher. From there, you can create assignments and flashcard decks, assign them to your students, and monitor their progress. As a student you are able to view your assignments, study, and mark your assignments complete. The application also features authentication and authorization, as well as custom CSS to make the user interface more visually appealing.
 
 ## Technologies
 
@@ -130,9 +130,9 @@ Assignments: A join table to track which decks are assigned to which students. T
 - Connect to an external API (to be determined) to import decks that others have created on other platforms
 
 ## Known Bugs or Issues
-- Sometimes the wrong deck is displayed when you select a deck to inspect
-- FIXED w/ commit 54- Bug when deleting a flashcard. The flashcard will persist until you leave the current deck and then re-enter it. No refresh required.
-- FIXED w/ Redux/Assignment Slice: New Assignment triggers a refresh in order to correctly display Assignments when a student is selected
+- FIXED New assignment does not display under the student it was assigned to until page is refreshed
+- FIXED Bug when deleting a flashcard. The flashcard will persist until you leave the current deck and then re-enter it. No refresh required.
+- FIXED New Assignment triggers a refresh in order to correctly display Assignments when a student is selected
 
 ## Links
 - [Project Pitch](https://docs.google.com/document/d/1WmIiYez49Na_1eP1I17_heVjv6m_5hpN2YAwVDWoQXM/edit#)
