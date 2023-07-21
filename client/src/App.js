@@ -25,7 +25,6 @@ function App() {
   const decks = useSelector((state) => state.deck.decks);
   const students = useSelector((state) => state.student.students)
 
-  // Add this state
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   // Fetch Teacher 3 => NEED TO UPDATE TO FETCH LOGGED IN TEACHER!!
